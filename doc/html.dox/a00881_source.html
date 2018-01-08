@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>MED fichier:  Fichier source de MEDversionedApi3C.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MED fichier
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.9.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Documentation&#160;MED</span></a></li>
+      <li><a href="pages.html"><span>Guides&#160;d'utilisation</span></a></li>
+      <li><a href="modules.html"><span>Guides&#160;de&#160;référence</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_cec12cd549f52b3d29d6f7f0d48c36fe.html">Dev_V3</a></li><li class="navelem"><a class="el" href="dir_53b98ffe583600852d7b367057e69c5a.html">src</a></li><li class="navelem"><a class="el" href="dir_5a50df702df7267f929a8dffef004091.html">misc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">MEDversionedApi3C.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00881.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*  This file is part of MED.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *  COPYRIGHT (C) 1999 - 2016  EDF R&amp;D, CEA/DEN</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  MED is free software: you can redistribute it and/or modify</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *  it under the terms of the GNU Lesser General Public License as published by</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *  the Free Software Foundation, either version 3 of the License, or</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *  (at your option) any later version.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *  MED is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *  but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *  GNU Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *  You should have received a copy of the GNU Lesser General Public License</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *  along with MED.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00576.html">med_config.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00583.html">med_misc.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00586.html">med_utils.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a> <a class="code" href="a00881_a6b4f76a2adfa945bfea8918e195c9245.html#a6b4f76a2adfa945bfea8918e195c9245">getVersionedApi3</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> keycharpart,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> keynumpart);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/*  La gestion suivante suppose d&#39;utiliser un digit par numéro intervenant dans la verion X.Y.Z  */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*  ex 9.10.9 ne peut pas être géré. */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00881_a0971610626f22ac12c520c72a4d4054c.html#a0971610626f22ac12c520c72a4d4054c">   30</a></span>&#160;<a class="code" href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a> <a class="code" href="a00881_a0971610626f22ac12c520c72a4d4054c.html#a0971610626f22ac12c520c72a4d4054c">_MEDversionedApi3</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="keyword">const</span> key,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                               <span class="keyword">const</span> <a class="code" href="a00570_a88dc15143f934cc7b771bc89f46372dc.html#a88dc15143f934cc7b771bc89f46372dc">med_int</a> majeur,<span class="keyword">const</span>  <a class="code" href="a00570_a88dc15143f934cc7b771bc89f46372dc.html#a88dc15143f934cc7b771bc89f46372dc">med_int</a> mineur,<span class="keyword">const</span>  <a class="code" href="a00570_a88dc15143f934cc7b771bc89f46372dc.html#a88dc15143f934cc7b771bc89f46372dc">med_int</a> release) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a> func=(<a class="code" href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a>) NULL;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">char</span>        _version[4]=<span class="stringliteral">&quot;&quot;</span>, _version236[4]=<span class="stringliteral">&quot;236&quot;</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">int</span>         _n=0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">int</span>         _fversionMM  = 100*majeur+10*mineur;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">int</span>         _fversionMMR = _fversionMM+release;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">int</span>         _litminor    = mineur;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">int</span>   _lminminor   = 0;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">if</span> ( _fversionMMR &lt;  220 ) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;Cette bibliothèque MED n&#39;est pas capable de lire un fichier MED de version &lt; 2.2.0&quot;</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;La version demandée est :&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="a00586_ae7ba0433e91c450cd44c3808c2acb497.html#ae7ba0433e91c450cd44c3808c2acb497">ISCRUTE_int</a>(_fversionMMR);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">goto</span> QUIT;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">if</span> ( _fversionMM &gt; 100*<a class="code" href="a00570_a6747c1ac7c0589009db553b675e3b6a7.html#a6747c1ac7c0589009db553b675e3b6a7">MED_NUM_MAJEUR</a>+10*<a class="code" href="a00570_a9acc99e52c9a7bd3208f9c934b473baa.html#a9acc99e52c9a7bd3208f9c934b473baa">MED_NUM_MINEUR</a> ) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;Cette bibliothèque MED n&#39;est pas capable de lire un fichier MED dont le mineur de la version &quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="stringliteral">&quot;excède celui de la bibliothèque.&quot;</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;La version demandée est :&quot;</span>);<a class="code" href="a00586_ae7ba0433e91c450cd44c3808c2acb497.html#ae7ba0433e91c450cd44c3808c2acb497">ISCRUTE_int</a>(_fversionMMR);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">goto</span> QUIT;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">/* Dans la bibliothèque 3.0 toutes les APIs en lecture/info</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">   *  sont versionées en 2.3.6. Celles-ci sont capables de compatibilité</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">   * ascendante des fichiers 2.2.0 à 2.3.6 */</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">if</span> ( _fversionMMR &lt;= 236 ) { func=<a class="code" href="a00881_a6b4f76a2adfa945bfea8918e195c9245.html#a6b4f76a2adfa945bfea8918e195c9245">getVersionedApi3</a>(key,_version236); <span class="keywordflow">goto</span> QUIT;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">/*  - Recherche du dernier numéro mineur disponible pour la routine versionné</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">      dans la bibliothèque MED actuelle  versionMMR 100*MED_NUM_MAJEUR+10*MED_NUM_MINEUR</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">      -A partir de la 2.4.0, on oblige le developpeur à versionner</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">      uniquement des routines en x.y.0 ;  x.y+1.* et x.y.* étant  incompatibles (en terme de modèle)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">      et  x.y.0 et x.y.a étant compatible, x.y.a n&#39;apparait pas dans la table</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">      de versionement</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">/*</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">   * Lorsqu&#39;une routine non versionnée doit être versionnée, la nouvelle</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">   * implémentation est numérotée en &quot;MED_NUM_MAJEUR&quot;MED_NUM_MINEUR&quot; et l&#39;ancienne</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">   * en &quot;MED_NUM_MAJEUR&quot;.0</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">/*</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">   * La recherche d&#39;une routine compatible se fait de façon décroissante</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">   * à partir du mineur du fichier jusqu&#39;à 0 ou une poentielle rupture de compatibilité</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">   * (le mineur a changé)</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">   *</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">   */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">/*Rem (_fversionMMR &gt; 290) car cette version est une version de developpement et aucun fichier</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">    issu de bibliotèques 2.y.z  ne devrait être en circulation.*/</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">if</span> ( (_fversionMMR &gt; 290) ||</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;       (_fversionMM &lt;= (100*<a class="code" href="a00570_a6747c1ac7c0589009db553b675e3b6a7.html#a6747c1ac7c0589009db553b675e3b6a7">MED_NUM_MAJEUR</a>+10*<a class="code" href="a00570_a9acc99e52c9a7bd3208f9c934b473baa.html#a9acc99e52c9a7bd3208f9c934b473baa">MED_NUM_MINEUR</a>) )</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;       ) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">/* Recherche décroissante à partir du numéro de release de la bibliothèque */</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">while</span> ( ( func == (<a class="code" href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a>)NULL) &amp;&amp; (_litminor &gt;= _lminminor ) ) {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#ifdef PPRO_NT</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      _n = _snprintf(_version,4,<span class="stringliteral">&quot;%d%d%d&quot;</span>,(<span class="keywordtype">int</span>) majeur,_litminor,0);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      _n = snprintf(_version,4,<span class="stringliteral">&quot;%d%d%d&quot;</span>,(<span class="keywordtype">int</span>) majeur,_litminor,0);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keywordflow">if</span> ( (_n &lt; 0) || (_n &gt; 3) ) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;Impossible d&#39;obtenir un numéro de version valide : &quot;</span>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        _version[3]=<span class="charliteral">&#39;\0&#39;</span>;<a class="code" href="a00586_a257959db0a78623caa051d11ceb2f8cb.html#a257959db0a78623caa051d11ceb2f8cb">SSCRUTE</a>(_version);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      func=<a class="code" href="a00881_a6b4f76a2adfa945bfea8918e195c9245.html#a6b4f76a2adfa945bfea8918e195c9245">getVersionedApi3</a>(key,_version);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      --_litminor;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">goto</span> QUIT;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; QUIT:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">if</span> (func == NULL) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;Impossible d&#39;obtenir une implémentation de : &quot;</span>);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="a00586_a257959db0a78623caa051d11ceb2f8cb.html#a257959db0a78623caa051d11ceb2f8cb">SSCRUTE</a>(key);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;en version :&quot;</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="a00586_ae7ba0433e91c450cd44c3808c2acb497.html#ae7ba0433e91c450cd44c3808c2acb497">ISCRUTE_int</a>(_fversionMMR);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a>(<span class="stringliteral">&quot;Vérifiez votre fichier .med et votre version de bibliothèque.&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">return</span> func;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="ttc" id="a00586_a3756046b0a6a7e51b8eb544d0d77c17c_html_a3756046b0a6a7e51b8eb544d0d77c17c"><div class="ttname"><a href="a00586_a3756046b0a6a7e51b8eb544d0d77c17c.html#a3756046b0a6a7e51b8eb544d0d77c17c">MESSAGE</a></div><div class="ttdeci">#define MESSAGE(chaine)</div><div class="ttdef"><b>Definition:</b> <a href="a00586_source.html#l00316">med_utils.h:316</a></div></div>
+<div class="ttc" id="a00576_html"><div class="ttname"><a href="a00576.html">med_config.h</a></div></div>
+<div class="ttc" id="a00586_ae7ba0433e91c450cd44c3808c2acb497_html_ae7ba0433e91c450cd44c3808c2acb497"><div class="ttname"><a href="a00586_ae7ba0433e91c450cd44c3808c2acb497.html#ae7ba0433e91c450cd44c3808c2acb497">ISCRUTE_int</a></div><div class="ttdeci">#define ISCRUTE_int(entier)</div><div class="ttdef"><b>Definition:</b> <a href="a00586_source.html#l00307">med_utils.h:307</a></div></div>
+<div class="ttc" id="a00881_a0971610626f22ac12c520c72a4d4054c_html_a0971610626f22ac12c520c72a4d4054c"><div class="ttname"><a href="a00881_a0971610626f22ac12c520c72a4d4054c.html#a0971610626f22ac12c520c72a4d4054c">_MEDversionedApi3</a></div><div class="ttdeci">MedFuncType _MEDversionedApi3(const char *const key, const med_int majeur, const med_int mineur, const med_int release)</div><div class="ttdef"><b>Definition:</b> <a href="a00881_source.html#l00030">MEDversionedApi3C.c:30</a></div></div>
+<div class="ttc" id="a00583_af20d4eee3abe4dd6f20146af0d0e7360_html_af20d4eee3abe4dd6f20146af0d0e7360"><div class="ttname"><a href="a00583_af20d4eee3abe4dd6f20146af0d0e7360.html#af20d4eee3abe4dd6f20146af0d0e7360">MedFuncType</a></div><div class="ttdeci">void(* MedFuncType)(int,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00583_source.html#l00029">med_misc.h:29</a></div></div>
+<div class="ttc" id="a00570_a88dc15143f934cc7b771bc89f46372dc_html_a88dc15143f934cc7b771bc89f46372dc"><div class="ttname"><a href="a00570_a88dc15143f934cc7b771bc89f46372dc.html#a88dc15143f934cc7b771bc89f46372dc">med_int</a></div><div class="ttdeci">int med_int</div><div class="ttdef"><b>Definition:</b> <a href="a00570_source.html#l00316">med.h:316</a></div></div>
+<div class="ttc" id="a00583_html"><div class="ttname"><a href="a00583.html">med_misc.h</a></div></div>
+<div class="ttc" id="a00570_a6747c1ac7c0589009db553b675e3b6a7_html_a6747c1ac7c0589009db553b675e3b6a7"><div class="ttname"><a href="a00570_a6747c1ac7c0589009db553b675e3b6a7.html#a6747c1ac7c0589009db553b675e3b6a7">MED_NUM_MAJEUR</a></div><div class="ttdeci">#define MED_NUM_MAJEUR</div><div class="ttdef"><b>Definition:</b> <a href="a00570_source.html#l00058">med.h:58</a></div></div>
+<div class="ttc" id="a00570_a9acc99e52c9a7bd3208f9c934b473baa_html_a9acc99e52c9a7bd3208f9c934b473baa"><div class="ttname"><a href="a00570_a9acc99e52c9a7bd3208f9c934b473baa.html#a9acc99e52c9a7bd3208f9c934b473baa">MED_NUM_MINEUR</a></div><div class="ttdeci">#define MED_NUM_MINEUR</div><div class="ttdef"><b>Definition:</b> <a href="a00570_source.html#l00059">med.h:59</a></div></div>
+<div class="ttc" id="a00586_html"><div class="ttname"><a href="a00586.html">med_utils.h</a></div></div>
+<div class="ttc" id="a00881_a6b4f76a2adfa945bfea8918e195c9245_html_a6b4f76a2adfa945bfea8918e195c9245"><div class="ttname"><a href="a00881_a6b4f76a2adfa945bfea8918e195c9245.html#a6b4f76a2adfa945bfea8918e195c9245">getVersionedApi3</a></div><div class="ttdeci">MedFuncType getVersionedApi3(const char *const keycharpart, const char *const keynumpart)</div><div class="ttdef"><b>Definition:</b> <a href="a00879_source.html#l00267">MEDversionedApi3.cxx:267</a></div></div>
+<div class="ttc" id="a00586_a257959db0a78623caa051d11ceb2f8cb_html_a257959db0a78623caa051d11ceb2f8cb"><div class="ttname"><a href="a00586_a257959db0a78623caa051d11ceb2f8cb.html#a257959db0a78623caa051d11ceb2f8cb">SSCRUTE</a></div><div class="ttdeci">#define SSCRUTE(chaine)</div><div class="ttdef"><b>Definition:</b> <a href="a00586_source.html#l00315">med_utils.h:315</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Lundi 7 Novembre 2016 14:19:23 pour MED fichier par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

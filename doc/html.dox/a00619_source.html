@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>MED fichier:  Fichier source de MEDerreur.cxx</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MED fichier
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.9.1 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Documentation&#160;MED</span></a></li>
+      <li><a href="pages.html"><span>Guides&#160;d'utilisation</span></a></li>
+      <li><a href="modules.html"><span>Guides&#160;de&#160;référence</span></a></li>
+    </ul>
+  </div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_cec12cd549f52b3d29d6f7f0d48c36fe.html">Dev_V3</a></li><li class="navelem"><a class="el" href="dir_53b98ffe583600852d7b367057e69c5a.html">src</a></li><li class="navelem"><a class="el" href="dir_5a50df702df7267f929a8dffef004091.html">misc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">MEDerreur.cxx</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00619.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*  This file is part of MED.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *  COPYRIGHT (C) 1999 - 2016  EDF R&amp;D, CEA/DEN</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  MED is free software: you can redistribute it and/or modify</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *  it under the terms of the GNU Lesser General Public License as published by</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *  the Free Software Foundation, either version 3 of the License, or</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *  (at your option) any later version.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> *  MED is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *  but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *  GNU Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *  You should have received a copy of the GNU Lesser General Public License</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *  along with MED.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00620.html">MEDerreur.hxx</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00534.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00534.html">OSS</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00534_acbe8bc75214c441a925eb2ab98ff869d.html#acbe8bc75214c441a925eb2ab98ff869d">   33</a></span>&#160;  std::ostringstream <a class="code" href="a00534_acbe8bc75214c441a925eb2ab98ff869d.html#acbe8bc75214c441a925eb2ab98ff869d">oss_</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00534_a9b2181081631512db5d84db2464acacd.html#a9b2181081631512db5d84db2464acacd">   36</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="a00534_a9b2181081631512db5d84db2464acacd.html#a9b2181081631512db5d84db2464acacd">OSS</a>() : oss_() {}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a00534_a22abd0ccd30d67865989976ccd57d068.html#a22abd0ccd30d67865989976ccd57d068">   39</a></span>&#160;  <a class="code" href="a00534.html">OSS</a> &amp; <a class="code" href="a00534_a22abd0ccd30d67865989976ccd57d068.html#a22abd0ccd30d67865989976ccd57d068">operator&lt;&lt;</a>(T obj)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    oss_ &lt;&lt; obj;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00534_aec21c2daaac19676aa46134f63b471c1.html#aec21c2daaac19676aa46134f63b471c1">   45</a></span>&#160;  <span class="keyword">operator</span> std::string()</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> oss_.str();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// Surtout ne pas écrire le code suivant:</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">// car oss_.str() renvoie une string temporaire</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">//   operator const char*()</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">//   {</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">//     return oss_.str().c_str();</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">//   }</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}; <span class="comment">/* end class OSS */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a00533_aacfa1e7986459bd67b734985b56d00ef.html#aacfa1e7986459bd67b734985b56d00ef">   61</a></span>&#160;<a class="code" href="a00533_aacfa1e7986459bd67b734985b56d00ef.html#aacfa1e7986459bd67b734985b56d00ef">MEDerreur::~MEDerreur</a>() throw() {};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a00533_a5ba3d55554625fd6393bbb05a3adb1df.html#a5ba3d55554625fd6393bbb05a3adb1df">   63</a></span>&#160;<a class="code" href="a00533_a5ba3d55554625fd6393bbb05a3adb1df.html#a5ba3d55554625fd6393bbb05a3adb1df">MEDerreur::MEDerreur</a>( <span class="keyword">const</span> <span class="keywordtype">char</span> *fichier,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ligneNo,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">char</span> * message,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">char</span> * arg )</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="a00534.html">OSS</a> oss ;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  oss &lt;&lt; <span class="stringliteral">&quot;MEDerreur&quot;</span> ;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">if</span> ( strcmp(fichier,<span class="stringliteral">&quot;&quot;</span>) ) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    oss &lt;&lt; <span class="stringliteral">&quot; dans le fichier &quot;</span> &lt;&lt; fichier;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> ( ligneNo) oss &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; ligneNo &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  oss &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt;  message;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a00533_ac7bac34f0d4b62e32cf5aeb7ee9cc7a7.html#ac7bac34f0d4b62e32cf5aeb7ee9cc7a7">_what</a> = oss;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="a00533_a974e742dec40f43360bd268e142e9301.html#a974e742dec40f43360bd268e142e9301">   82</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a00533_a974e742dec40f43360bd268e142e9301.html#a974e742dec40f43360bd268e142e9301">MEDerreur::what</a>( <span class="keywordtype">void</span> ) <span class="keyword">const</span> throw ()</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00533_ac7bac34f0d4b62e32cf5aeb7ee9cc7a7.html#ac7bac34f0d4b62e32cf5aeb7ee9cc7a7">_what</a>.c_str();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="ttc" id="a00534_a22abd0ccd30d67865989976ccd57d068_html_a22abd0ccd30d67865989976ccd57d068"><div class="ttname"><a href="a00534_a22abd0ccd30d67865989976ccd57d068.html#a22abd0ccd30d67865989976ccd57d068">OSS::operator&lt;&lt;</a></div><div class="ttdeci">OSS &amp; operator&lt;&lt;(T obj)</div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00039">MEDerreur.cxx:39</a></div></div>
+<div class="ttc" id="a00533_ac7bac34f0d4b62e32cf5aeb7ee9cc7a7_html_ac7bac34f0d4b62e32cf5aeb7ee9cc7a7"><div class="ttname"><a href="a00533_ac7bac34f0d4b62e32cf5aeb7ee9cc7a7.html#ac7bac34f0d4b62e32cf5aeb7ee9cc7a7">MEDerreur::_what</a></div><div class="ttdeci">std::string _what</div><div class="ttdef"><b>Definition:</b> <a href="a00620_source.html#l00039">MEDerreur.hxx:39</a></div></div>
+<div class="ttc" id="a00534_a9b2181081631512db5d84db2464acacd_html_a9b2181081631512db5d84db2464acacd"><div class="ttname"><a href="a00534_a9b2181081631512db5d84db2464acacd.html#a9b2181081631512db5d84db2464acacd">OSS::OSS</a></div><div class="ttdeci">OSS()</div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00036">MEDerreur.cxx:36</a></div></div>
+<div class="ttc" id="a00533_a974e742dec40f43360bd268e142e9301_html_a974e742dec40f43360bd268e142e9301"><div class="ttname"><a href="a00533_a974e742dec40f43360bd268e142e9301.html#a974e742dec40f43360bd268e142e9301">MEDerreur::what</a></div><div class="ttdeci">virtual const char * what(void) const </div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00082">MEDerreur.cxx:82</a></div></div>
+<div class="ttc" id="a00533_a5ba3d55554625fd6393bbb05a3adb1df_html_a5ba3d55554625fd6393bbb05a3adb1df"><div class="ttname"><a href="a00533_a5ba3d55554625fd6393bbb05a3adb1df.html#a5ba3d55554625fd6393bbb05a3adb1df">MEDerreur::MEDerreur</a></div><div class="ttdeci">MEDerreur(const char *fichier=&quot;&quot;, const unsigned int ligneNo=0, const char *message=&quot;&quot;, const char *arg=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00063">MEDerreur.cxx:63</a></div></div>
+<div class="ttc" id="a00533_aacfa1e7986459bd67b734985b56d00ef_html_aacfa1e7986459bd67b734985b56d00ef"><div class="ttname"><a href="a00533_aacfa1e7986459bd67b734985b56d00ef.html#aacfa1e7986459bd67b734985b56d00ef">MEDerreur::~MEDerreur</a></div><div class="ttdeci">virtual ~MEDerreur(void)</div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00061">MEDerreur.cxx:61</a></div></div>
+<div class="ttc" id="a00534_acbe8bc75214c441a925eb2ab98ff869d_html_acbe8bc75214c441a925eb2ab98ff869d"><div class="ttname"><a href="a00534_acbe8bc75214c441a925eb2ab98ff869d.html#acbe8bc75214c441a925eb2ab98ff869d">OSS::oss_</a></div><div class="ttdeci">std::ostringstream oss_</div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00033">MEDerreur.cxx:33</a></div></div>
+<div class="ttc" id="a00534_html"><div class="ttname"><a href="a00534.html">OSS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00619_source.html#l00030">MEDerreur.cxx:30</a></div></div>
+<div class="ttc" id="a00620_html"><div class="ttname"><a href="a00620.html">MEDerreur.hxx</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Lundi 7 Novembre 2016 14:19:23 pour MED fichier par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>
