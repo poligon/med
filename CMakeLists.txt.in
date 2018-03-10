@@ -63,11 +63,15 @@ IF(WIN32)
   ADD_DEFINITIONS(-D_SCL_SECURE_NO_WARNINGS)  # To disable windows warnings std::copy, std::transform, ...
   ADD_DEFINITIONS(-DWNT -DWIN32)
   ADD_DEFINITIONS(-D_WIN32_WINNT=0x0500) # Windows 2000 or later API is required
-  ADD_DEFINITIONS(-DPPRO_NT) # For medfile
-  
-  # Needed to avoid a seg fault at runtime!
-  # The variable is not very well documented but seems to exist
-  SET(CMAKE_Fortran_FLAGS  "/iface:mixed_str_len_arg ${CMAKE_Fortran_FLAGS}")
+  ADD_DEFINITIONS(-DPPRO_NT_CALL) # For windows system functions call
+
+  IF(NOT MINGW)
+    # Needed to avoid a seg fault at runtime!
+    # The variable is not very well documented but seems to exist
+    SET(CMAKE_Fortran_FLAGS  "/iface:mixed_str_len_arg ${CMAKE_Fortran_FLAGS}")
+    ADD_DEFINITIONS(-DPPRO_NT) # For windows medfile function nammes
+  ENDIF()
+
 ELSE()
   # Ensure intermediate OBJECT libraries and static libs are built with -fPIC:
   SET(CMAKE_POSITION_INDEPENDENT_CODE ON)

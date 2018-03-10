@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -93,7 +93,12 @@ _MEDgetDatatype(med_internal_type  * const datatype,
 extern MEDC_EXPORT med_err
 _MEDgetEntityTypeName(char * const entitytypename,
 		      const med_entity_type entitytype);
-
+extern MEDC_EXPORT med_err
+_MEDgetFieldEntityGeoTypeName(med_idt fid,
+			      char * const entitygeotypename,
+			      const med_entity_type entitytype,
+			      const med_geometry_type geotype );
+  
 extern MEDC_EXPORT med_err
 _MEDgetGeometricParameter(const med_entity_type       entitytype,
 			  const med_geometry_type     geotype,
@@ -110,7 +115,7 @@ _MEDgetDynGeometricParameter(const med_idt fid,
 			     med_int * const             ncells);
 
 extern MEDC_EXPORT med_err
-_MEDgetInternalGeometryTypeName(char * const geotypename,med_geometry_type geotype);
+_MEDgetInternalGeometryTypeName(const med_idt fid, char * const geotypename, med_geometry_type geotype);
 
 extern MEDC_EXPORT med_err
 _MEDgetExternalGeometryTypeName(char * const geotypename,med_geometry_type geotype);

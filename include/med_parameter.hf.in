@@ -50,7 +50,8 @@
       integer MED_POINT1,MED_SEG2,MED_SEG3,MED_SEG4,MED_TRIA3
       integer MED_QUAD4,MED_TRIA6,MED_TRIA7,MED_QUAD8,MED_QUAD9
       integer MED_TETRA4,MED_PYRA5,MED_PENTA6,MED_HEXA8,MED_TETRA10
-      integer MED_OCTA12,MED_PYRA13,MED_PENTA15,MED_HEXA20,MED_HEXA27 
+      integer MED_OCTA12,MED_PYRA13,MED_PENTA15,MED_PENTA18
+      integer MED_HEXA20,MED_HEXA27 
       integer MED_POLYGON,MED_POLYGON2
       integer MED_POLYHEDRON, MED_STRUCT_GEO_INTERNAL
       integer MED_STRUCT_GEO_SUP_INTERNAL,MED_NONE 
@@ -74,6 +75,7 @@
       parameter(MED_OCTA12=312)
       parameter(MED_PYRA13=313)
       parameter(MED_PENTA15=315)
+      parameter(MED_PENTA18=318)
       parameter(MED_HEXA20=320)
       parameter(MED_HEXA27=327)
       parameter(MED_POLYGON=400)
@@ -95,9 +97,9 @@
       integer  MED_N_EDGE_GEO_FIXED_CON
       integer  MED_N_NODE_GEO,MED_N_NODE_FIXED_GEO
       integer  MED_N_NODE_GEO_FIXED_CON   
-      parameter(MED_N_CELL_GEO=24)
-      parameter(MED_N_CELL_FIXED_GEO=23)
-      parameter(MED_N_CELL_GEO_FIXED_CON=20)
+      parameter(MED_N_CELL_GEO=25)
+      parameter(MED_N_CELL_FIXED_GEO=24)
+      parameter(MED_N_CELL_GEO_FIXED_CON=21)
       parameter(MED_N_FACE_GEO=8)
       parameter(MED_N_FACE_FIXED_GEO=8)
       parameter(MED_N_FACE_GEO_FIXED_CON=6)
@@ -169,8 +171,10 @@
       parameter(MED_INTERPOLATION=10, MED_NUMERICAL_DATA=11)
       parameter(MED_LINK=13, MED_CLASS_UNDEF=-1, MED_CLASS_ALL=-2)
 
-      integer MED_INT32, MED_INT64,MED_FLOAT64,MED_INT
-      parameter (MED_INT32=24, MED_INT64=26,MED_FLOAT64=6,MED_INT=28)
+      integer MED_INT32,MED_INT64,MED_INT
+      integer MED_FLOAT32,MED_FLOAT64,MED_DOUBLE
+      parameter (MED_INT32=24, MED_INT64=26, MED_INT=28)
+      parameter (MED_FLOAT32=4, MED_FLOAT64=6, MED_DOUBLE=6)
 
       integer MED_ATT_FLOAT64,MED_ATT_INT,MED_ATT_NAME
       integer MED_ATT_UNDEF

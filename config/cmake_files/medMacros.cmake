@@ -179,6 +179,49 @@ ELSE(${SIZEOF_FORTRAN_INTEGER} EQUAL 8)
     ENDIF(${SIZEOF_FORTRAN_INTEGER} EQUAL 4)
 ENDIF(${SIZEOF_FORTRAN_INTEGER} EQUAL 8)
 
+##
+## The below is a light porting of what the M4 macro config/med_check_typeof_int64.m4 does
+##
+
+# Try to find 64 and 32 bits types on the platform: 
+SET(HAVE_INT64 0)
+SET(MED_INT64 0)
+SET(MED_INT32 0)
+CHECK_TYPE_SIZE(int64_t SIZEOF_INT64T)
+IF (${SIZEOF_INT64T} EQUAL 8)
+    MESSAGE(STATUS "Type 'int64_t' exists and is 8 bytes")
+    SET(MED_INT64 "int64_t")
+    SET(HAVE_INT64 1)
+ELSE()
+    MESSAGE(WARNING "Type 'int64_t' has WRONG size or is UNDEFINED (${SIZEOF_INT64T})!! 64bits fields will be unavailable")
+    SET(MED_INT64 "med_int")
+ENDIF()
+
+CHECK_TYPE_SIZE(int32_t SIZEOF_INT32T)
+IF (${SIZEOF_INT32T} EQUAL 4)
+    MESSAGE(STATUS "Type 'int32_t' exists and is 4 bytes")
+    SET(MED_INT32 "int32_t")
+ELSE()
+    MESSAGE(FATAL_ERROR "Type 'int32_t' has WRONG size or is UNDEFINED (${SIZEOF_INT32T})!! Unable to pursue.")
+ENDIF()
+
+# In the HDF5 world we have to come back to native types ('long' or 'long long') since int64_t or int32_t
+# won't be understood
+SET(MED_H5T_INT64)
+CHECK_TYPE_SIZE("long long" SIZEOF_LONGLONG)
+CHECK_TYPE_SIZE("long" SIZEOF_LONG)
+IF (${SIZEOF_LONG} EQUAL 8)
+    SET(MED_H5T_INT64 "H5T_NATIVE_LONG")
+    MESSAGE(STATUS "MED_H5T_INT64 will map to H5T_NATIVE_LONG")
+ELSE()
+    IF (${SIZEOF_LONGLONG} EQUAL 8)
+        SET(MED_H5T_INT64 "H5T_NATIVE_LLONG")
+        MESSAGE(STATUS "MED_H5T_INT64 will map to H5T_NATIVE_LLONG")
+    ELSE()
+        MESSAGE(FATAL_ERROR "Neither 'long' or 'long long' are 8 bytes long!! Unable to pursue.")
+    ENDIF()
+ENDIF()
+
 ENDMACRO(MED_CHECK_SIZE)
 
 ###############################################################################

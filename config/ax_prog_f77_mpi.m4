@@ -158,7 +158,7 @@ dnl
 AC_DEFUN([__AX_PROG_F77_MPI], [
   AC_ARG_VAR(MPIF77,[MPI Fortran77 compiler command])
   ifelse([$1],,[_ax_prog_f77_mpi_mpi_wanted=yes],[
-    AC_MSG_CHECKING([whether to compile using MPI])
+    AC_MSG_CHECKING([whether to compile F77 using MPI])
     if $1; then
       _ax_prog_f77_mpi_mpi_wanted=yes
     else

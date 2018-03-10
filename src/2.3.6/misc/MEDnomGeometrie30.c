@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -106,6 +106,10 @@ med_err _MEDnomGeometrie30(char *nom_geo,med_geometrie_element type_geo)
        strcpy(nom_geo,MED_NOM_P15);
        break;
        
+     case MED_PENTA18 :
+       strcpy(nom_geo,"---");
+       break;
+
      case MED_PYRA5 :
        strcpy(nom_geo,MED_NOM_PY5);
        break;

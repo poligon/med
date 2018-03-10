@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -92,7 +92,7 @@ MedFuncType _MEDversionedApi3( const char * const key,
     /* Recherche décroissante à partir du numéro de release de la bibliothèque */
     while ( ( func == (MedFuncType)NULL) && (_litminor >= _lminminor ) ) {
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
       _n = _snprintf(_version,4,"%d%d%d",(int) majeur,_litminor,0);
 #else
       _n = snprintf(_version,4,"%d%d%d",(int) majeur,_litminor,0);

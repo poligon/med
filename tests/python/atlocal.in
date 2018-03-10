@@ -1,2 +1,0 @@
-#TODO: Utiliser une substitution commune avec le Makefile.am
-testpydir=@prefix@/bin/testpy

@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -78,11 +78,15 @@ H5AC_cache_config_t config;
   }
 
   if ((_fid = H5Fopen(filename,_hdf_mode,_fapl)) < 0) {
-    MED_ERR_(_fid,MED_ERR_OPEN,MED_ERR_FILE,"");
-    ISCRUTE_int(accessmode);
-/* Ne pas activer la ligne suivante en production, car certains code utlisent MEDfileOpen
-pour tester la présence d'un fichier */
-/*    H5Eprint1(stderr); */
+    /*La gestion de l'affichage des erreurs se fait dans la couche supérieure*/
+    /*cela permet de tester l'ouverture du fichier (cf MEDfileCompatibility) sans provoquer 
+     d'affichage intempestif.*/
+    _fid = MED_ERR_OPEN MED_ERR_FILE;
+    /* MED_ERR_(_fid,MED_ERR_OPEN,MED_ERR_FILE,""); */
+    /* ISCRUTE_int(accessmode); */
+    /* Ne pas activer la ligne suivante en production, car certains code 
+       utlisent MEDfileOpen pour tester la présence d'un fichier */
+    /*    H5Eprint1(stderr); */
     goto ERROR;
   }
 

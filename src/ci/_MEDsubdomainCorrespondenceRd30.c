@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -127,7 +127,7 @@ void _MEDsubdomainCorrespondenceRd30(int dummy, ...) {
     ISCRUTE_int(localentitype);SSCRUTE(jointname);goto ERROR;
   }
   if ( localentitype != MED_NODE ) {
-    if ( _MEDgetInternalGeometryTypeName(_localgeotypename,localgeotype) < 0) {
+    if ( _MEDgetInternalGeometryTypeName(fid,_localgeotypename,localgeotype) < 0) {
       MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
       ISCRUTE_int(localgeotype);SSCRUTE(jointname);goto ERROR;
     }
@@ -142,7 +142,7 @@ void _MEDsubdomainCorrespondenceRd30(int dummy, ...) {
     ISCRUTE_int(remoteentitype);SSCRUTE(jointname);goto ERROR;
   }
   if ( remoteentitype != MED_NODE ) {
-    if ( _MEDgetInternalGeometryTypeName(_remotegeotypename,remotegeotype) < 0) {
+    if ( _MEDgetInternalGeometryTypeName(fid,_remotegeotypename,remotegeotype) < 0) {
       MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
       ISCRUTE_int(remotegeotype);SSCRUTE(jointname);goto ERROR;
     }

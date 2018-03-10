@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -34,8 +34,10 @@ med_err _MEDgetDynGeometricParameter(const med_idt fid,
   med_idt _elemid=0;
   char    _path[MED_ELSTRUCT_GRP_SIZE+MED_NAME_SIZE+1]=MED_ELSTRUCT_GRP;
   char    _supportmeshname[MED_NAME_SIZE+1]="";
+  med_bool           _chgt=MED_FALSE,_trsf=MED_FALSE;
+  med_geometry_type  sgeotype;
+  med_int            _medintsgeotype = MED_NONE;
 /*   char *  _modelname[MED_NAME_SIZE+1]=""; */
-  med_bool          _chgt=MED_FALSE,_trsf=MED_FALSE;
 
 
 
@@ -82,6 +84,15 @@ med_err _MEDgetDynGeometricParameter(const med_idt fid,
     goto ERROR;
   }
 
+  /*
+   * Lecture de l'attribut MED_NOM_GEO (type géométrique des mailles support)
+   */
+  if ( _MEDattrEntierLire(_elemid,MED_NOM_GEO,&_medintsgeotype) < 0 ) {
+    MED_ERR_(_ret,MED_ERR_READ,MED_ERR_ATTRIBUTE,_path);
+    SSCRUTE(MED_NOM_GEO);ISCRUTE(_medintsgeotype);
+    goto ERROR;
+  }
+  sgeotype=_medintsgeotype;
 
   /*
    * Lecture du nombre de noeuds support
@@ -103,7 +114,7 @@ med_err _MEDgetDynGeometricParameter(const med_idt fid,
 
   if (strlen(_supportmeshname)) {
     if ( (*ncells = MEDmeshnEntity(fid,_supportmeshname,MED_NO_DT,MED_NO_IT,
-				   MED_CELL,geotype,MED_CONNECTIVITY,MED_NODAL,
+				   MED_CELL,sgeotype,MED_CONNECTIVITY,MED_NODAL,
 				   &_chgt,&_trsf) )  < 0) {
       MED_ERR_(_ret,MED_ERR_CALL,MED_ERR_API,"MEDmeshnEntity");
       ISCRUTE(*ncells);goto ERROR;

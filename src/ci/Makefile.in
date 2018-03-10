@@ -114,6 +114,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/ac_check_sizeof_fortran.m4 \
 	$(top_srcdir)/config/med_check_python.m4 \
 	$(top_srcdir)/config/med_check_swig.m4 \
 	$(top_srcdir)/config/med_check_typeof_hidt.m4 \
+	$(top_srcdir)/config/med_check_typeof_int64.m4 \
 	$(top_srcdir)/config/med_check_typeof_medint.m4 \
 	$(top_srcdir)/config/med_disable_api23.m4 \
 	$(top_srcdir)/config/med_enable_check23.m4 \
@@ -147,9 +148,10 @@ am__libci_la_SOURCES_DIST = MEDmeshEntityAttributeAdvancedWr.c \
 	MEDfileObjectsUnmount.c MEDfileObjectExist.c MEDnProfile.c \
 	MEDprofileInfo.c MEDprofileWr.c MEDprofileSizeByName.c \
 	MEDprofileRd.c MEDfilterEntityCr.c MEDfilterBlockOfEntityCr.c \
-	_MEDfieldValueAdvancedWr30.c MEDfieldValueAdvancedWr.c \
-	MEDfieldValueWithProfileWr.c MEDfieldValueWr.c \
-	_MEDfieldValueAdvancedRd30.c _MEDfieldValueAdvancedRd236.c \
+	_MEDfieldValueAdvancedWr30.c _MEDfieldValueAdvancedWr33.c \
+	MEDfieldValueAdvancedWr.c MEDfieldValueWithProfileWr.c \
+	MEDfieldValueWr.c _MEDfieldValueAdvancedRd30.c \
+	_MEDfieldValueAdvancedRd33.c _MEDfieldValueAdvancedRd236.c \
 	MEDfieldValueAdvancedRd.c MEDfieldValueWithProfileRd.c \
 	MEDfieldValueRd.c MEDfieldCr.c MEDnField.c \
 	MEDfieldnComponent.c MEDfieldnComponentByName.c MEDfieldInfo.c \
@@ -233,6 +235,7 @@ am__libci_la_SOURCES_DIST = MEDmeshEntityAttributeAdvancedWr.c \
 	_MEDfieldCr31.c _MEDfieldCr30.c _MEDfieldComputingStepInfo30.c \
 	_MEDfieldComputingStepInfo31.c _MEDfieldComputingStepInfo236.c \
 	_MEDfieldComputingStepMeshInfo30.c \
+	_MEDfieldComputingStepMeshInfo31.c \
 	_MEDfieldComputingStepMeshInfo236.c \
 	_MEDfieldComputingStepCheck236.c _MEDfieldInfoByName30.c \
 	_MEDfieldInfoByName236.c _MEDfieldnProfile30.c \
@@ -244,6 +247,9 @@ am__libci_la_SOURCES_DIST = MEDmeshEntityAttributeAdvancedWr.c \
 	_MEDequivalenceInfo30.c _MEDequivalenceInfo236.c \
 	_MEDequivalenceCorrespondenceSize30.c \
 	_MEDequivalenceCorrespondenceSize236.c \
+	_MEDequivalenceCorrespondenceWr33.c \
+	_MEDequivalenceCorrespondenceWr30.c \
+	_MEDequivalenceCorrespondenceRd33.c \
 	_MEDequivalenceCorrespondenceRd30.c \
 	_MEDequivalenceCorrespondenceRd236.c \
 	_MEDequivalenceComputingStepInfo30.c \
@@ -298,9 +304,10 @@ am_libci_la_OBJECTS = MEDmeshEntityAttributeAdvancedWr.lo \
 	MEDfileObjectExist.lo MEDnProfile.lo MEDprofileInfo.lo \
 	MEDprofileWr.lo MEDprofileSizeByName.lo MEDprofileRd.lo \
 	MEDfilterEntityCr.lo MEDfilterBlockOfEntityCr.lo \
-	_MEDfieldValueAdvancedWr30.lo MEDfieldValueAdvancedWr.lo \
-	MEDfieldValueWithProfileWr.lo MEDfieldValueWr.lo \
-	_MEDfieldValueAdvancedRd30.lo _MEDfieldValueAdvancedRd236.lo \
+	_MEDfieldValueAdvancedWr30.lo _MEDfieldValueAdvancedWr33.lo \
+	MEDfieldValueAdvancedWr.lo MEDfieldValueWithProfileWr.lo \
+	MEDfieldValueWr.lo _MEDfieldValueAdvancedRd30.lo \
+	_MEDfieldValueAdvancedRd33.lo _MEDfieldValueAdvancedRd236.lo \
 	MEDfieldValueAdvancedRd.lo MEDfieldValueWithProfileRd.lo \
 	MEDfieldValueRd.lo MEDfieldCr.lo MEDnField.lo \
 	MEDfieldnComponent.lo MEDfieldnComponentByName.lo \
@@ -392,6 +399,7 @@ am_libci_la_OBJECTS = MEDmeshEntityAttributeAdvancedWr.lo \
 	_MEDfieldComputingStepInfo31.lo \
 	_MEDfieldComputingStepInfo236.lo \
 	_MEDfieldComputingStepMeshInfo30.lo \
+	_MEDfieldComputingStepMeshInfo31.lo \
 	_MEDfieldComputingStepMeshInfo236.lo \
 	_MEDfieldComputingStepCheck236.lo _MEDfieldInfoByName30.lo \
 	_MEDfieldInfoByName236.lo _MEDfieldnProfile30.lo \
@@ -404,6 +412,9 @@ am_libci_la_OBJECTS = MEDmeshEntityAttributeAdvancedWr.lo \
 	_MEDequivalenceInfo236.lo \
 	_MEDequivalenceCorrespondenceSize30.lo \
 	_MEDequivalenceCorrespondenceSize236.lo \
+	_MEDequivalenceCorrespondenceWr33.lo \
+	_MEDequivalenceCorrespondenceWr30.lo \
+	_MEDequivalenceCorrespondenceRd33.lo \
 	_MEDequivalenceCorrespondenceRd30.lo \
 	_MEDequivalenceCorrespondenceRd236.lo \
 	_MEDequivalenceComputingStepInfo30.lo \
@@ -552,7 +563,10 @@ EXEEXT = @EXEEXT@
 F77 = @F77@
 FC = @FC@
 FCFLAGS = @FCFLAGS@
+FCFLAGS_F = @FCFLAGS_F@
+FCFLAGS_F90 = @FCFLAGS_F90@
 FCLIBS = @FCLIBS@
+FC_DEFINE = @FC_DEFINE@
 FFLAGS = @FFLAGS@
 FGREP = @FGREP@
 FLIBS = @FLIBS@
@@ -592,6 +606,8 @@ MANIFEST_TOOL = @MANIFEST_TOOL@
 MED_API_23 = @MED_API_23@
 MED_CHECK_23FORMAT = @MED_CHECK_23FORMAT@
 MED_DEFINE_MED_HAVE_MPI = @MED_DEFINE_MED_HAVE_MPI@
+MED_INT32 = @MED_INT32@
+MED_INT64 = @MED_INT64@
 MED_NUM_MAJEUR = @MED_NUM_MAJEUR@
 MED_NUM_MINEUR = @MED_NUM_MINEUR@
 MED_NUM_RELEASE = @MED_NUM_RELEASE@
@@ -731,9 +747,10 @@ libci_la_SOURCES = MEDmeshEntityAttributeAdvancedWr.c \
 	MEDfileObjectsUnmount.c MEDfileObjectExist.c MEDnProfile.c \
 	MEDprofileInfo.c MEDprofileWr.c MEDprofileSizeByName.c \
 	MEDprofileRd.c MEDfilterEntityCr.c MEDfilterBlockOfEntityCr.c \
-	_MEDfieldValueAdvancedWr30.c MEDfieldValueAdvancedWr.c \
-	MEDfieldValueWithProfileWr.c MEDfieldValueWr.c \
-	_MEDfieldValueAdvancedRd30.c _MEDfieldValueAdvancedRd236.c \
+	_MEDfieldValueAdvancedWr30.c _MEDfieldValueAdvancedWr33.c \
+	MEDfieldValueAdvancedWr.c MEDfieldValueWithProfileWr.c \
+	MEDfieldValueWr.c _MEDfieldValueAdvancedRd30.c \
+	_MEDfieldValueAdvancedRd33.c _MEDfieldValueAdvancedRd236.c \
 	MEDfieldValueAdvancedRd.c MEDfieldValueWithProfileRd.c \
 	MEDfieldValueRd.c MEDfieldCr.c MEDnField.c \
 	MEDfieldnComponent.c MEDfieldnComponentByName.c MEDfieldInfo.c \
@@ -817,6 +834,7 @@ libci_la_SOURCES = MEDmeshEntityAttributeAdvancedWr.c \
 	_MEDfieldCr31.c _MEDfieldCr30.c _MEDfieldComputingStepInfo30.c \
 	_MEDfieldComputingStepInfo31.c _MEDfieldComputingStepInfo236.c \
 	_MEDfieldComputingStepMeshInfo30.c \
+	_MEDfieldComputingStepMeshInfo31.c \
 	_MEDfieldComputingStepMeshInfo236.c \
 	_MEDfieldComputingStepCheck236.c _MEDfieldInfoByName30.c \
 	_MEDfieldInfoByName236.c _MEDfieldnProfile30.c \
@@ -828,6 +846,9 @@ libci_la_SOURCES = MEDmeshEntityAttributeAdvancedWr.c \
 	_MEDequivalenceInfo30.c _MEDequivalenceInfo236.c \
 	_MEDequivalenceCorrespondenceSize30.c \
 	_MEDequivalenceCorrespondenceSize236.c \
+	_MEDequivalenceCorrespondenceWr33.c \
+	_MEDequivalenceCorrespondenceWr30.c \
+	_MEDequivalenceCorrespondenceRd33.c \
 	_MEDequivalenceCorrespondenceRd30.c \
 	_MEDequivalenceCorrespondenceRd236.c \
 	_MEDequivalenceComputingStepInfo30.c \
@@ -1106,10 +1127,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceComputingStepInfo30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceRd236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceRd30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceRd33.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceSize236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceSize30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceSizeInfo236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceSizeInfo30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceWr30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceCorrespondenceWr33.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceInfo236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDequivalenceInfo30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfamily23Info236.Plo@am__quote@
@@ -1132,13 +1156,16 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldComputingStepInfo31.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldComputingStepMeshInfo236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldComputingStepMeshInfo30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldComputingStepMeshInfo31.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldCr30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldCr31.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldInfoByName236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldInfoByName30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldValueAdvancedRd236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldValueAdvancedRd30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldValueAdvancedRd33.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldValueAdvancedWr30.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldValueAdvancedWr33.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldnProfile236.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldnProfile30.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/_MEDfieldnValue.Plo@am__quote@
@@ -1442,6 +1469,7 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
+#AM_ETAGSFLAGS=
 #SWIG_PYTHON_OPT=
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

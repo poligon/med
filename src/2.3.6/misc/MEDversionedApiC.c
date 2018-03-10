@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -70,7 +70,7 @@ MedFuncType _MEDversionedApi( char * key, med_int majeur,
     itrelease = irelease;
     while ( ( func == (MedFuncType)NULL) && (minrelease <= itrelease ) ) {
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
       n = _snprintf(version,4,"%d%d%d",imajeur,imineur,itrelease);
 #else
       n = snprintf(version,4,"%d%d%d",imajeur,imineur,itrelease);
@@ -92,7 +92,7 @@ MedFuncType _MEDversionedApi( char * key, med_int majeur,
      uniquement des routines en x.y.0 ;  x.y+1.* et x.y.* étant incompatible
      et  x.y.0 et x.y.a étant compatible, x.y.a n'apparait pas dans la table
      de versionement */
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
   n = _snprintf(version,4, IFORMAT IFORMAT IFORMAT,majeur,mineur,0);
 #else
   n = snprintf(version,4, IFORMAT IFORMAT IFORMAT,majeur,mineur,0);

@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 // Windows Header Files:
 #include <windows.h>
 #include <Lmcons.h>
@@ -73,7 +73,7 @@ MEDmeshUniversalNameWr(const med_idt fid,
   char    _path [MED_MESH_GRP_SIZE+MED_NAME_SIZE+1]=MED_MESH_GRP;
   char    _unvname [MED_LNAME_SIZE+1]="";
   time_t  _time;
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
   struct timeb   _tp;
   char   _lpBuffer [UNLEN+1]="";
   long   _nSize   = UNLEN+1;
@@ -113,7 +113,7 @@ MEDmeshUniversalNameWr(const med_idt fid,
    * Creation/Ecriture de l'attribut nom universel
    */
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 
   if ( GetUserName(_lpBuffer,&_nSize) == 0 ) goto ERROR_;
   if ( _nSize > MED_NAME_SIZE ) _nSize = MED_NAME_SIZE;

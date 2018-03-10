@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -21,7 +21,7 @@
 #include <med_outils.h>
 #include <string.h>
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 #define F_OK 0
 #else
 #include <unistd.h>
@@ -78,7 +78,10 @@ void _MEDfileObjectsMount30(int dummy, ...){
     goto ERROR;
   }
 
-
+  /*Le montage se fait soit en utilisant le chfid soit le mountfilename */
+  /*si un chfid est donné, il est utilisé et le mountfilename est le chemin est le
+    chemin à partir duquel se trouve la structure au format MED à monter dans le fichier hôte (parent). 
+  */
   if (chfid) {
     _id=chfid;
   } else {
@@ -87,7 +90,6 @@ void _MEDfileObjectsMount30(int dummy, ...){
       MED_ERR_(_ret,MED_ERR_EXIST,MED_ERR_FILE,mountfilename);
       goto ERROR;
     }
-
     /* Open the file "mountfilename". */
     if ((_id = _MEDfileOpen(mountfilename,_accessMode)) < 0) {
       MED_ERR_(_ret,MED_ERR_OPEN,MED_ERR_FILE,mountfilename);
@@ -201,7 +203,7 @@ void _MEDfileObjectsMount30(int dummy, ...){
 
   /*
    * Un datagroup spécifique à la <medclass> montée est crée
-     Celà permet de monter simultanément plusieurs <medclass>
+     Celà permet de monter simultanément plusieurs type de <medclass>
   */
   if ((_linkId = _MEDdatagroupOuvrir(_rootId,&_link[1])) <0)
     if ((_linkId = _MEDdatagroupCreer(_rootId,&_link[1])) < 0) {
@@ -239,7 +241,7 @@ void _MEDfileObjectsMount30(int dummy, ...){
 
   /* On s'assure que le datagroup <link> n'existe pas à la racine du fichier d'acceuil
      REM1 : Par cette technique, il n'est pas possible de monter un <medclass> distant s'il en
-     existe un réel dans le fichier d'acceuil
+     existe un local dans le fichier d'acceuil
      REM2 : Puisque l'on ne peut monter que la racine d'un fichier dans un autre,
      on ne peut monter le fichier cible à la racine qui masquerait les autres <medclass>
      REM3 : Pour monter un fichier, il faut que le fichier d'acceuil soit ouvert en lecture/écriture

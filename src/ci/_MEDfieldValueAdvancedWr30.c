@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -158,9 +158,8 @@ if (_MEDcheckVersion30(fid) < 0) goto ERROR;
     (*_filter).nconstituentpervalue = _nconstituentpervalue;
   }
 
-
-
   /* Lecture de l'attribut MED_NOM_TYP */
+
   if ( _MEDattrEntierLire(_gid,MED_NOM_TYP,&_intfieldtype) < 0) {
     MED_ERR_(_ret,MED_ERR_READ,MED_ERR_ATTRIBUTE,MED_ERR_FIELD_MSG);
     SSCRUTE(fieldname);SSCRUTE(MED_NOM_TYP);
@@ -253,7 +252,7 @@ if (_MEDcheckVersion30(fid) < 0) goto ERROR;
 	ISCRUTE_int(geotype);goto ERROR;
       }
     } else {
-      if ( _MEDgetInternalGeometryTypeName(_geotypename,geotype) < 0) {
+      if ( _MEDgetInternalGeometryTypeName(fid,_geotypename,geotype) < 0) {
 	MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
 	ISCRUTE_int(geotype);SSCRUTE(fieldname);goto ERROR;
       }
@@ -500,6 +499,19 @@ if (_MEDcheckVersion30(fid) < 0) goto ERROR;
   /*
    * Ecriture du champ
    */
+
+
+  /* Tous les types med_field_type sont autorisés dans MEDfieldCr mais :
+     Avant la 3.3.0 seuls les types : MED_FLOAT64,MED_INT32 et MED_INT64 étaient autorisés dans MEDfieldValueAdvancedWr et seul le type med_int et med_float64 pouvaient être utilisés en C.
+      A l'écriture, si med_int=int  les champs MED_INT32 étaient stockés en interne en HDFINT32bits
+      A l'écriture, si med_int=long les champs MED_INT32 étaient stockés en interne en HDFINT64bits
+      A la lecture : - si med_int=int  le champ MED_INT32 est relu en en HDFINT32bit avec conversion 64->32 si necessaire
+                    - si med_int=long le champ MED_INT32 est relu en en HDFINT64bit avec conversion 32->64 si necessaire
+      A l'écriture, si med_int=int les champs MED_INT64 étaient interdits
+      A l'écriture, si med_int=long les champs MED_INT64 étaient stockés en interne en HDFINT64bits
+      A la lecture : - si med_int=int  le champ MED_INT64 ne pouvait pas être relu (pour prevenir la perte d'information)
+                    - si med_int=long le champ MED_INT64 est relu sans conversion     
+  */
 
   switch(_fieldtype)
     {

@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -119,7 +119,7 @@ _MEDfieldnProfile30(int dummy, ...) {
 	ISCRUTE_int(geotype);goto ERROR;
       }
     } else {
-      if (_MEDgetInternalGeometryTypeName(_geotypename,geotype) < 0) {
+      if (_MEDgetInternalGeometryTypeName(0,_geotypename,geotype) < 0) {
 	MED_ERR_(_ret,MED_ERR_READ,MED_ERR_GEOMETRIC,_geotypename);
 	goto ERROR;
       }

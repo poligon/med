@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -25,7 +25,6 @@
 med_err _MEDgetDatatype(med_internal_type * const datatype, const med_data_type meddatatype, med_connectivity_mode cmode )
 {
   med_err _ret=-1;
-  /*TODO : Remplacer par un tableau global const de pointeur const ! (plus de strcpy) */
   switch(meddatatype)
     {
     case MED_COORDINATE :

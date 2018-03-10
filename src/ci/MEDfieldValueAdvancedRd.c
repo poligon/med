@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -34,6 +34,10 @@
   \param value \value
   \retval med_err \error
   \details \MEDfieldValueAdvancedRdDetails
+
+  \remarks
+  \MEDfieldValueAdvancedRdRem
+
  */
 
 med_err MEDfieldValueAdvancedRd(const med_idt              fid,

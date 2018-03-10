@@ -56,6 +56,9 @@
 /* Define to 1 if you have the <H5public.h> header file. */
 #undef HAVE_H5PUBLIC_H
 
+/* The size of a int64_t, as computed by sizeof. */
+#undef HAVE_INT64
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
@@ -120,11 +123,17 @@
    data model which is not be managable by a MED3.0 function. */
 #undef MED_CHECK_23FORMAT
 
+/* The hdf type to user for 64bits signed integer type. */
+#undef MED_H5T_INT64
+
 /* Define if the Fortran part of MED library must be compiled. */
 #undef MED_HAVE_FORTRAN
 
 /* Define if the Python part of MED library must be installed. */
 #undef MED_HAVE_PYTHON
+
+/* The size of a long imply the size of python integer via swig. */
+#undef MED_SWIG_INT64
 
 /* MED library will not display error messages. */
 #undef MESGERR
@@ -168,6 +177,9 @@
 /* The size of `long', as computed by sizeof. */
 #undef SIZEOF_LONG
 
+/* The size of `long long', as computed by sizeof. */
+#undef SIZEOF_LONG_LONG
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
@@ -179,6 +191,14 @@
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const
+
+/* Define to the type of a signed integer type of width exactly 32 bits if
+   such a type exists and the standard includes do not define it. */
+#undef int32_t
+
+/* Define to the type of a signed integer type of width exactly 64 bits if
+   such a type exists and the standard includes do not define it. */
+#undef int64_t
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef size_t

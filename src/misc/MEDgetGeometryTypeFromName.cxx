@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -52,6 +52,7 @@ MED_GET_GEOTYPE_FROM_NAME::MED_GET_GEOTYPE_FROM_NAME() : map<string,med_geometry
   table["H27"] = MED_HEXA27;
   table["PE6"] = MED_PENTA6;
   table["P15"] = MED_PENTA15;
+  table["P18"] = MED_PENTA18;
   table["PY5"] = MED_PYRA5;
   table["P13"] = MED_PYRA13;
   table["POG"] = MED_POLYGON;

@@ -5,7 +5,7 @@ TABLE DES MATIERES
 
 1. 	Obtenir la derniere version
 
-2.   	Installer la bibliotheque MED 3.1
+2.   	Installer la bibliotheque MED 3.2
 2.1 	Plates-formes supportees
 2.2 	Logiciels necessaires a l'installation
 2.3	Lancement de l'installation sous UNIX
@@ -26,9 +26,9 @@ La version la plus recente de la bibliotheque MED se trouve
 sur le serveur intranet EDF R&D : http://med.der.edf.fr.
 
 
-2. 	Installer la bibliotheque MED 3.1
+2. 	Installer la bibliotheque MED 3.2
 
-Pour compiler et installer la librairie MED3.1 ainsi que sa
+Pour compiler et installer la librairie MED3.2 ainsi que sa
 batterie de programmes tests et ses utilitaires, 
 verifiez tout d'abord que vous disposez 
 d'un environnement adéquat puis appliquez les instructions suivantes.
@@ -72,7 +72,9 @@ Remarques :
   Il faut alors regénérer les interfaces swig en précisant l'option --with-swig. 
   Une fois construite en version //, si vous utiliser la même arborescence pour construire une version 
   de medfichier avec une version séquentielle d'HDF il faut de nouveau activer l'option --with-swig pour
-  regénérer les interfaces swig sans MPI (à l'identique des versions initialements embarquées).
+  regénérer les interfaces swig sans MPI (à l'identique des versions initialement embarquées).
+  La version de swig utilisé par med-3.3 est actuellement 2.0.9.
+  Si vous utilisez un compilateur tel que gcc-6.4 il faut utiliser une version 3 de swig.
   
 - la bibliothèque MED utilise le C++ depuis sa version 2.3.2.
 

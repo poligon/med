@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -61,6 +61,7 @@ med_geometry_type MED_GET_CELL_GEOMETRY_TYPE[MED_N_CELL_FIXED_GEO+2]={
   MED_OCTA12,
   MED_PYRA13,
   MED_PENTA15,
+  MED_PENTA18,
   MED_HEXA20,
   MED_HEXA27,
   MED_POLYGON,
@@ -89,6 +90,7 @@ const char * const MED_GET_CELL_GEOMETRY_TYPENAME[MED_N_CELL_FIXED_GEO+2]={
   "MED_OCTA12",
   "MED_PYRA13",
   "MED_PENTA15",
+  "MED_PENTA18",
   "MED_HEXA20",
   "MED_HEXA27",
   "MED_POLYGON",

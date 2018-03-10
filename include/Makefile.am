@@ -12,7 +12,7 @@ nodist_include_HEADERS = med.h med_utils.h med_parameter.hf
 ## For having included files in DISTribution only (private headers)
 noinst_HEADERS = med_outils.h  med_misc.h  \
 	med_hdfi.h med_versioned_proto.h med_versioned_proto_en.h \
-	med_versioned_hdfi.h med_versioned_cfi.h med_versioned.h \
+	med_versioned_hdfi.h med_versioned_misc.h med_versioned_cfi.h med_versioned.h \
 	MEDversionedApi3.hxx MEDgetGeometryTypeFromName.hxx MEDmodeAcces.hxx \
 	MEDfileVersion.hxx MEDfieldChecked.hxx med_vargs.h
 

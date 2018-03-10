@@ -49,10 +49,12 @@ MEDprofileRd.c \
 MEDfilterEntityCr.c \
 MEDfilterBlockOfEntityCr.c \
 _MEDfieldValueAdvancedWr30.c \
+_MEDfieldValueAdvancedWr33.c \
 MEDfieldValueAdvancedWr.c \
 MEDfieldValueWithProfileWr.c \
 MEDfieldValueWr.c \
 _MEDfieldValueAdvancedRd30.c \
+_MEDfieldValueAdvancedRd33.c \
 _MEDfieldValueAdvancedRd236.c \
 MEDfieldValueAdvancedRd.c \
 MEDfieldValueWithProfileRd.c \
@@ -231,6 +233,7 @@ _MEDfieldComputingStepInfo30.c \
 _MEDfieldComputingStepInfo31.c \
 _MEDfieldComputingStepInfo236.c \
 _MEDfieldComputingStepMeshInfo30.c \
+_MEDfieldComputingStepMeshInfo31.c \
 _MEDfieldComputingStepMeshInfo236.c \
 _MEDfieldComputingStepCheck236.c \
 _MEDfieldInfoByName30.c \
@@ -251,6 +254,9 @@ _MEDequivalenceInfo30.c \
 _MEDequivalenceInfo236.c \
 _MEDequivalenceCorrespondenceSize30.c \
 _MEDequivalenceCorrespondenceSize236.c \
+_MEDequivalenceCorrespondenceWr33.c \
+_MEDequivalenceCorrespondenceWr30.c \
+_MEDequivalenceCorrespondenceRd33.c \
 _MEDequivalenceCorrespondenceRd30.c \
 _MEDequivalenceCorrespondenceRd236.c \
 _MEDequivalenceComputingStepInfo30.c \

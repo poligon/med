@@ -3,7 +3,7 @@
 ## Initialize Autoconf & defined package name...
 ##Lors de la sortie d'une nouvelle release mettre à jour les champs suivants
 ##Mettre à jour le numéro de package
-AC_INIT([MED Fichier],3.2.1,[eric.fayolle@edf.fr],med)
+AC_INIT([MED Fichier],3.3.1,[eric.fayolle@edf.fr],med)
 
 ##Lors de la sortie d'une nouvelle release mettre à jour les champs suivants
 ##Ne pas oubliez de modifier  -version-info x:y:z dans src/Makefile.am tools/medimport/Makefile.am
@@ -13,7 +13,7 @@ AC_INIT([MED Fichier],3.2.1,[eric.fayolle@edf.fr],med)
 ##Mettre à jour la table de versionement des APIs internes (en C et en F)
 ##Mettre à jour les tests de compatibilité dans MEDfileCompatibility (chgt de majeur/mineur)
 MED_NUM_MAJEUR=3
-MED_NUM_MINEUR=2
+MED_NUM_MINEUR=3
 MED_NUM_RELEASE=1
 
 AC_SUBST(MED_NUM_MAJEUR)
@@ -82,7 +82,7 @@ MED_ENABLE_CHECK23
 MED_ENABLE_INSTALLTEST
 
 # Checks for programs.
-test "x$ac_cv_prog_cc_c99" = "no" || AC_DEFINE(HAVE_CC_C99,[1],[The C99 capabilities of C compiler.])
+test "x$ac_cv_prog_cc_c99" = "xno" || AC_DEFINE(HAVE_CC_C99,[1],[The C99 capabilities of C compiler.])
 
 MED_CHECK_F77
 if test x"$enable_fortran" = xyes; then
@@ -90,7 +90,6 @@ if test x"$enable_fortran" = xyes; then
  AC_F77_LIBRARY_LDFLAGS
  MED_CHECK_TYPEOF_HIDT
 fi
-
 
 
 ## Choose med_int type between {int,long}
@@ -164,6 +163,9 @@ AC_CHECK_FUNCS([getpwuid geteuid cuserid])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_TYPE_SIZE_T
+dnl AC_TYPE_INT32_T
+dnl AC_TYPE_INT64_T
+MED_CHECK_TYPEOF_INT64
 
 # Checks for library functions.
 ##AC_FUNC_MALLOC
@@ -263,6 +265,8 @@ AC_CONFIG_FILES([Makefile
            tests/python/atlocal
            tests/c/Makefile
 	   tests/c/dumps.ref/Makefile
+           tests/c/3.2.1/Makefile
+           tests/c/3.2.1/dumps.ref/Makefile
            tests/c/3.1.0/Makefile
            tests/c/3.1.0/dumps.ref/Makefile
            tests/c/3.0.8/Makefile
@@ -281,6 +285,8 @@ AC_CONFIG_FILES([Makefile
            tests/c/2.3v3.0/dumps.ref/Makefile
 	   tests/f/Makefile
 	   tests/f/dumps.ref/Makefile
+           tests/f/3.2.1/Makefile
+           tests/f/3.2.1/dumps.ref/Makefile
            tests/f/3.1.0/Makefile
            tests/f/3.1.0/dumps.ref/Makefile
            tests/f/3.0.8/Makefile
@@ -326,6 +332,7 @@ AC_CONFIG_FILES([Makefile
            tools/medimport/2.3.6/Makefile
            tools/medimport/3.0.0/Makefile
            tools/medimport/3.1.0/Makefile
+           tools/medimport/3.2.0/Makefile
            doc/Makefile
            doc/dox/Makefile
            doc/dox/aliases.als

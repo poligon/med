@@ -102,6 +102,46 @@ _MEDfieldCr31(int dummy, ...) {
     SSCRUTE(fieldname);SSCRUTE(_datagroupname1);SSCRUTE(MED_NOM_NCO);
     ISCRUTE(ncomponent);goto ERROR;
   }
+
+
+
+  
+  /* Tous les types med_field_type sont autorisés dans MEDfieldCr mais :
+     Avant la 3.3.0 seuls les types : MED_FLOAT64,MED_INT32 et MED_INT64 étaient autorisés dans MEDfieldValueAdvancedWr 
+       et seul le type med_int et med_float64 pouvaient être utilisés en C.
+
+      A l'écriture, si med_int=int  les champs MED_INT32 étaient stockés en interne en HDFINT32bits
+      A l'écriture, si med_int=long les champs MED_INT32 étaient stockés en interne en HDFINT64bits
+      A la lecture : - si med_int=int  le champ MED_INT32 est relu en en HDFINT32bit avec conversion 64->32 si necessaire
+                    - si med_int=long le champ MED_INT32 est relu en en HDFINT64bit avec conversion 32->64 si necessaire
+      A l'écriture, si med_int=int les champs MED_INT64 étaient interdits
+      A l'écriture, si med_int=long les champs MED_INT64 étaient stockés en interne en HDFINT64bits
+      A la lecture : - si med_int=int  le champ MED_INT64 ne pouvait pas être relu (pour prevenir la perte d'information)
+                    - si med_int=long le champ MED_INT64 est relu sans conversion
+
+     Depuis la 3.3.0 en plus des types MED_FLOAT64,MED_INT32 et MED_INT64 les types MED_FLOAT32 et MED_INT sont autorisés dans MEDfieldValueAdvancedWr et aux types med_int et med_float64 utilisés en C sont ajoutés les types med_float32, med_int32 et med_int64.
+
+     MED_INT32 :
+      A l'écriture :  si med_int=int  les champs MED_INT32 sont toujours  stockés en interne en HDFINT32bits   (utiliser med_int32 ou med_int(!))
+                      si med_int=long les champs MED_INT32 sont désormais stockés en interne en HDFINT32bits   (utiliser le type med_int64) et désormais 
+      A la lecture :  si med_int=int  les champs MED_INT32 sont toujours  relus en HDFINT32bits sans conversion (utiliser med_int32 ou med_int(!))
+                      si med_int=long les champs MED_INT32 sont désormais relus en HDFINT32bits sans conversion (utiliser le type med_int32)
+     MED_INT64 :
+      A l'écriture :  si med_int=int  les champs MED_INT64 sont désormais autorisés et stockés en interne en HDFINT64bits  (utiliser le type med_int64)
+                      si med_int=long les champs MED_INT64 sont toujours  autorisés et stockés en interne en HDFINT64bits  (utiliser le type med_int64 ou med_int(!))
+      A la lecture :  si med_int=int  les champs MED_INT64 sont désormais relus en HDFINT64bits sans conversion (utiliser le type med_int64)
+                      si med_int=long les champs MED_INT64 sont toujours  relus en HDFINT64bits sans conversion  (utiliser le type med_int64 ou med_int(!))
+    
+     MED_INT :
+      A l'écriture :  si med_int=int  les champs MED_INT sont désormais acceptés et stockés en interne en HDFINT32bits    (utiliser med_int ou med_int32(!))
+                      si med_int=long les champs MED_INT sont désormais acceptés et stockés en interne en HDFINT64bits    (utiliser med_int ou med_int64(!)) 
+      A la lecture :  si med_int=int  les champs MED_INT sont désormais acceptés et relus en HDFINT32bits avec conversion/maxint si necessaire (utiliser med_int ou med_int32(!))
+                      si med_int=long les champs MED_INT sont désormais acceptés et relus en HDFINT64bits avec conversion        si necessaire (utiliser le type med_int32)
+   
+
+     Plateforme 32 bits : TODO si la plateforme est 32 bits, il faut .... ?
+  */
+
   if ( _MEDattributeIntWr(_datagroup1,MED_NOM_TYP,&_fieldtype) < 0) {
     MED_ERR_(_ret,MED_ERR_WRITE,MED_ERR_ATTRIBUTE,MED_ERR_FIELD_MSG);
     SSCRUTE(fieldname);SSCRUTE(_datagroupname1);SSCRUTE(MED_NOM_TYP);

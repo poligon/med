@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -89,7 +89,7 @@ _MEDequivalenceCorrespondenceSize30(int dummy, ...) {
     ISCRUTE_int(entitype);SSCRUTE(equivname);goto ERROR;
   }
   if ( entitype != MED_NODE ) {
-    if ( _MEDgetInternalGeometryTypeName(_geotypename,geotype) < 0) {
+    if ( _MEDgetInternalGeometryTypeName(0,_geotypename,geotype) < 0) {
       MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
       ISCRUTE_int(geotype);SSCRUTE(equivname);goto ERROR;
     }

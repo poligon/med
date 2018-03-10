@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 // Windows Header Files:
 #include <windows.h>
 #include <Lmcons.h>
@@ -62,7 +62,7 @@ MEDunvCr(med_idt fid, char *maa)
   char chemin [MED_TAILLE_MAA+MED_TAILLE_NOM+1]="";
   char nomu   [MED_TAILLE_LNOM+1]="";    
   time_t  temps;
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
   struct timeb   tp;
   char   lpBuffer [UNLEN+1]="";
   long   nSize   = UNLEN+1;
@@ -90,7 +90,7 @@ if (MEDcheckVersion(fid) < 0) return -1;
    * Creation/Ecriture de l'attribut nom universel 
    */
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
   if ( GetUserName(lpBuffer,&nSize) == 0 ) goto ERROR_;
   if ( nSize > MED_TAILLE_NOM ) nSize = MED_TAILLE_NOM;
   strncpy(nomu,lpBuffer,nSize);

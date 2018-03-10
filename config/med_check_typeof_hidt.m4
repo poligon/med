@@ -1,6 +1,6 @@
 dnl  This file is part of MED.
 dnl
-dnl  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+dnl  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
 dnl  MED is free software: you can redistribute it and/or modify
 dnl  it under the terms of the GNU Lesser General Public License as published by
 dnl  the Free Software Foundation, either version 3 of the License, or
@@ -29,7 +29,7 @@ AC_ARG_WITH([hid_t],
 
 #Si l'interface fortran n'est pas générée ne lance pas les tests avec compilation
 #La taille du hid_t est déduite de la version d'HDF.
-#A partir d'HDF 1.10 hid_t est 64 bits 
+#A partir d'HDF 1.10 hid_t est 64 bits
 test x"$withval" = xno && test x"$enable_fortran" && ( test "0${HDF5_VERSION}" -gt "10899" && withval=long || withval=int )
 
 dnl Si aucune directive n est donnée, on vérifie la taille du hid_t induit de la version HDF utilisée

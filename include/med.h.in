@@ -1,7 +1,7 @@
 /* -*- mode:C; coding:utf-8 -*- */
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -20,6 +20,9 @@
 #define MED_H
 
 #include <hdf5.h>
+#ifdef HAVE_STDINT_H
+#include <stdint.h>   // Use the C99 official header
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -146,14 +149,21 @@ typedef enum {MED_COORDINATE, MED_CONNECTIVITY, MED_NAME, MED_NUMBER,  MED_FAMIL
 
 /* 2.3v3.0 ok*/
 /** \internal*/
-typedef enum {MED_INTERNAL_FLOAT64=6, MED_INTERNAL_INT32=24,MED_INTERNAL_INT64=26,
-	 MED_INTERNAL_INT=28, MED_INTERNAL_NAME=30, MED_INTERNAL_SNAME=32,
-	 MED_INTERNAL_LNAME=34, MED_INTERNAL_IDENT=38, MED_INTERNAL_CHAR=40, MED_INTERNAL_UNDEF=0 } med_internal_type; /**< \internal */
+typedef enum {MED_INTERNAL_FLOAT32=4, MED_INTERNAL_FLOAT64=6,
+	      MED_INTERNAL_INT32=24 , MED_INTERNAL_INT64=26, MED_INTERNAL_INT=28,
+	      MED_INTERNAL_NAME=30  , MED_INTERNAL_SNAME=32,
+	      MED_INTERNAL_LNAME=34 , MED_INTERNAL_IDENT=38,
+	      MED_INTERNAL_CHAR=40  , MED_INTERNAL_UNDEF =0 } med_internal_type; /**< \internal */
 
 /*TODO: Réécrire les routines _MEDatt avec med_internal_type au lieu de med_field_type */
 
-typedef enum {MED_FLOAT64=MED_INTERNAL_FLOAT64, MED_INT32=MED_INTERNAL_INT32, 
-	      MED_INT64=MED_INTERNAL_INT64, MED_INT=MED_INTERNAL_INT }  med_field_type; 
+  typedef enum {MED_DOUBLE=MED_INTERNAL_FLOAT64,  /**<Type réel 64bits */
+		MED_FLOAT64=MED_INTERNAL_FLOAT64, /**<Type réel 64bits */
+		MED_FLOAT32=MED_INTERNAL_FLOAT32, /**<Type réel 32bits */
+		MED_INT32=MED_INTERNAL_INT32,     /**<Type entier 32bits */
+		MED_INT64=MED_INTERNAL_INT64,     /**<Type entier 64bits */
+		MED_INT=MED_INTERNAL_INT          /**<Type entier med_int dépendant de l'option de configuration --med-int */
+                                        }  med_field_type; 
 
 typedef enum {MED_ATT_FLOAT64=MED_INTERNAL_FLOAT64,
 	      MED_ATT_INT=MED_INTERNAL_INT,
@@ -178,6 +188,8 @@ typedef enum {MED_MESH, MED_FIELD, MED_LIBRARY, MED_FILE,
 
 typedef int med_geometry_type;
 
+/* Mailles dont la géométrie à une connectivité fixe*/
+
 #define MED_POINT1 001
 
 #define MED_SEG2 102
@@ -198,13 +210,16 @@ typedef int med_geometry_type;
 #define MED_OCTA12 312
 #define MED_PYRA13 313
 #define MED_PENTA15 315
+#define MED_PENTA18 318
 #define MED_HEXA20 320
 #define MED_HEXA27 327
 
+/* Mailles dont la géométrie à une connectivité variable*/
 #define MED_POLYGON 400
 #define MED_POLYGON2 420
 #define MED_POLYHEDRON 500
 
+/* Mailles dont la géométrie est dynamique (découverte du modèle dans le fichier) */
 #define MED_STRUCT_GEO_INTERNAL 600
 #define MED_STRUCT_GEO_SUP_INTERNAL 700
 
@@ -215,9 +230,9 @@ typedef int med_geometry_type;
 #define MED_ALL_GEOTYPE -1
 #define MED_GEO_ALL MED_ALL_GEOTYPE
 
-#define MED_N_CELL_GEO            24 /**< Nombre de types géométriques de mailles */
-#define MED_N_CELL_FIXED_GEO      23 /**< Nombre de types géométriques statiques de mailles */
-#define MED_N_CELL_GEO_FIXED_CON  20 /**< Nombre de types géométriques statiques de mailles à connectivité fixe */
+#define MED_N_CELL_GEO            25 /**< Nombre de types géométriques de mailles */
+#define MED_N_CELL_FIXED_GEO      24 /**< Nombre de types géométriques statiques de mailles */
+#define MED_N_CELL_GEO_FIXED_CON  21 /**< Nombre de types géométriques statiques de mailles à connectivité fixe */
 
 #define MED_N_FACE_GEO               8
 #define MED_N_FACE_FIXED_GEO         8
@@ -232,7 +247,7 @@ typedef int med_geometry_type;
 #define MED_N_NODE_GEO_FIXED_CON     1
 
 /*2.3v3.0 ok*/
-  typedef enum {MED_NODAL, MED_DESCENDING, MED_UNDEF_CONNECTIVITY_MODE=-1, MED_NO_CMODE=-1} med_connectivity_mode; 
+typedef enum {MED_NODAL, MED_DESCENDING, MED_UNDEF_CONNECTIVITY_MODE=-1, MED_NO_CMODE=-1} med_connectivity_mode; 
 
 /*2.3v3.0 ok*/
 typedef enum {MED_CARTESIAN, MED_CYLINDRICAL, MED_SPHERICAL, MED_UNDEF_AXIS_TYPE=-1} med_axis_type;
@@ -304,10 +319,17 @@ typedef herr_t         med_err;   /**< \internal */
 
 /* types elementaires */
 
-typedef double         med_float;
+typedef double         med_float; 
+typedef double         med_float64; 
+typedef double         med_double;
+typedef float          med_float32;
+
 /*La ligne suivante est déterminée à l'étape de configuration*/
 typedef @LONG_OR_INT@  med_int; /**< La taille du med_int est paramétrable à l'étape de configuration de med fichier. */
+typedef @MED_INT32@  med_int32;     /**< L'entier med de taille fixe 32bits. */
+typedef @MED_INT64@  med_int64; /**< L'entier med  de taille fixe 64bits. */
 
+#define INIT2X( x ) x, x,
 #define INIT4X( x ) x, x, x, x
 #define INIT10X( x ) x, x, x, x, x, x, x, x, x, x
 #define MED_MAX_FILTER_SPACES 4100

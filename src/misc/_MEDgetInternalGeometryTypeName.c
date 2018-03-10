@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -26,107 +26,24 @@
  * ELLES N'ONT PAS LA FORME MED_...
  */
 
-med_err _MEDgetInternalGeometryTypeName(char * const geotypename,med_geometry_type geotype)
+med_err _MEDgetInternalGeometryTypeName(med_idt fid, char * const geotypename,med_geometry_type geotype)
 {
-  /*TODO : Créer une map */
-  switch (geotype)
-    {
-    case MED_POINT1 :
-      strcpy(geotypename,MED_NOM_PO1);
-      break;
+  char *  name = "_MEDgetInternalGeometryTypeName";
+  int     dummy=0;
+  med_err fret=-1;
+  med_int majeur=MED_MAJOR_NUM, mineur=MED_MINOR_NUM, release=MED_RELEASE_NUM;
+  MedFuncType func;
 
-    case MED_SEG2 :
-      strcpy(geotypename,MED_NOM_SE2);
-      break;
+  if (fid != 0)
+    MEDfileNumVersionRd(fid, &majeur, &mineur, &release);
 
-    case MED_SEG3 :
-      strcpy(geotypename,MED_NOM_SE3);
-      break;
+  func = _MEDversionedApi3(name,majeur,mineur,release);
+  if ( func != (MedFuncType) NULL )
+    func (dummy,
+	  geotypename,
+	  geotype,
+	  &fret);
 
-    case MED_SEG4 :
-      strcpy(geotypename,MED_NOM_SE4);
-      break;
+  return fret;
 
-    case MED_TRIA3 :
-      strcpy(geotypename,MED_NOM_TR3);
-      break;
-
-    case MED_TRIA6 :
-      strcpy(geotypename,MED_NOM_TR6);
-      break;
-
-    case MED_TRIA7 :
-      strcpy(geotypename,MED_NOM_TR7);
-      break;
-
-    case MED_QUAD4 :
-      strcpy(geotypename,MED_NOM_QU4);
-      break;
-
-    case MED_QUAD8 :
-      strcpy(geotypename,MED_NOM_QU8);
-      break;
-
-    case MED_QUAD9 :
-      strcpy(geotypename,MED_NOM_QU9);
-      break;
-
-    case MED_TETRA4 :
-      strcpy(geotypename,MED_NOM_TE4);
-      break;
-
-    case MED_TETRA10 :
-      strcpy(geotypename,MED_NOM_T10);
-      break;
-
-    case MED_OCTA12 :
-      strcpy(geotypename,MED_NOM_O12);
-      break;
-
-    case MED_HEXA8 :
-      strcpy(geotypename,MED_NOM_HE8);
-      break;
-
-    case MED_HEXA20 :
-      strcpy(geotypename,MED_NOM_H20);
-      break;
-
-    case MED_HEXA27 :
-      strcpy(geotypename,MED_NOM_H27);
-      break;
-
-    case MED_PENTA6 :
-      strcpy(geotypename,MED_NOM_PE6);
-      break;
-
-    case MED_PENTA15 :
-      strcpy(geotypename,MED_NOM_P15);
-      break;
-
-    case MED_PYRA5 :
-      strcpy(geotypename,MED_NOM_PY5);
-      break;
-
-    case MED_PYRA13 :
-      strcpy(geotypename,MED_NOM_P13);
-      break;
-
-    case MED_POLYGON :
-      strcpy(geotypename,MED_NOM_POG);
-      break;
-
-    case MED_POLYGON2 :
-      strcpy(geotypename,MED_NOM_PO2);
-      break;
-
-    case MED_POLYHEDRON :
-      strcpy(geotypename,MED_NOM_POE);
-      break;
-
-    default :
-      strcpy(geotypename,"MED_NO_GEOTYPE");
-      break;
-    }
-
-  return 0;
 }

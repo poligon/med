@@ -1,3 +1,43 @@
+Modifications dans la version 3.3.1 :
+
+- Correction d'une erreur générée à l'appel de MEDmeshnEntity dans mdump pour les éléments de structures
+- Correction : maj medimport
+
+Modifications dans la version 3.3.0 :
+
+- Ajout du type MED_PENTA18
+- Ajout dans la documentation du modèle MED_PENTA18 en .svg
+- Ajout de la notion d'équivalence de mailles 3D pour les raccords non-conformes
+- Remise à niveau et réarchitecture de la documentation concernant les équivalences
+- Ajout et gestion des nouveaux types de Champs MED_FLOAT32, MED_INT32 et MED_INT64 en C,F,Py
+- Nouvelles procédures de tests pour générer plusieurs variantes d'un même test (i32,i64,f32,f64) en C
+- Nouvelles procédures de tests pour générer plusieurs variantes d'un même test (i32,i64,f32,f64) en F
+- Transformation des test10 & 11 en tests paramétrables par le type de réels et le type d'entiers à utiliser
+- Analyse automatique des sorties standards des tests C/F/Python
+- Gestion différenciée des sorties int 32/64 bits pour les tests python
+- La génération des .py des wrappers python est maintenant conditionnée aussi par int/long
+- Supprime les module.py de la distribution car seuls les modèles _int.py ou _long.py doivent être livrés.
+- Test des nouveaux types de champs sur système 32bits (sur machine 64bits)
+- Suite à une optimisation de parcours des champs effectuée dans la 3.1.0
+  l'ordre de parcours des champs a été mis à jour en 3.1.0 dans les routines MEDfieldComputingStepInfo et
+  MEDfield23ComputingStepInfo mais (par omission) pas dans la fonction MEDfieldComputingStepMeshInfo
+  L'ordre de parcours à été mis à jour pour être cohérent avec MEDfieldComputingStepInfo comme documenté (création).
+- Correction d'un bug dans MEDfileCompatibility concernant la vérification que le type de fichier est bien hdf
+- Correction de la valeur de retour du paramètre trf de MEDmeshnEntity pour un appel concernant MED_CONNECTIVITY ou MED_COORDINATE si
+  des modifications sont détectées entre pas de temps sur des informations autres que les connectivités des éléments/les coordonnées des noeuds.
+- Amélioration de la documentation des options de mdump3
+- Correction dans mdump3 d'une fuite mémoire de taille 1 (un caractère) à la lecture d'attributs constants
+  de type MED_ATT_NAME de modèles d'éléments de structure.
+- Correction de l'affichage d'un espace supplémentaire dans mdump
+- Les outils mdump et xmdump deviennent des liens relatifs au lieu de liens absolus
+- Mise à jour des fichiers de référence Fortran en med_int=int
+- Corrections d'expressions fortran non strictement 77
+- Corrections pour portage MacOS.
+- Corrections pour portage MinGW
+- Gestion d'architectures supplémentaires pour les tests
+- Mise à jour de la construction CMake d'après la version Autotools
+
+
 Modifications dans la version 3.2.1 :
 
 - Gestion de la detection d'hdf serial/parallel qui cohabitent dans les répertoires systèmes
@@ -125,7 +165,7 @@ Modifications dans la version 3.0.4 :
  -Modification du système de construction («makefile»), ajout des fichiers «makefile.cmake» pour la compilation avec l'outil «cmake»
  -Modification du système de déclaration des fonctions internes à arguments variables pour gérer les incompatibilités du compilateur Visual C avec la norme C99
 
--Extensionn de l'API:
+-Extension de l'API:
  -Ajout des routinesC : MEDmeshGeotypeName, MEDmeshGeotypeParameter, MEDsupportMeshnAxis, MEDsupportMeshnAxisByName
  -Ajouts des routines FORTRAN : msmfnan, msmfnax
 

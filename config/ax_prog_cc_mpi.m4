@@ -157,7 +157,7 @@ AC_BEFORE([$0],[AC_PROG_CC])
 
   AC_ARG_VAR(MPICC,[MPI C compiler command])
   ifelse([$1],,[_ax_prog_cc_mpi_mpi_wanted=yes],[
-    AC_MSG_CHECKING([whether to compile using MPI])
+    AC_MSG_CHECKING([whether to compile C using MPI])
     if $1; then
       _ax_prog_cc_mpi_mpi_wanted=yes
     else

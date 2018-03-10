@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -67,6 +67,10 @@ med_err _MEDdatasetWr(const med_idt               id,
       _hdftype = H5T_NATIVE_DOUBLE;
       break;
 
+    case MED_INTERNAL_FLOAT32 :
+      _hdftype = H5T_NATIVE_FLOAT;
+      break;
+
     case MED_INT :
 #if defined(HAVE_F77INT64)
       _hdftype = H5T_NATIVE_LONG;
@@ -80,7 +84,9 @@ med_err _MEDdatasetWr(const med_idt               id,
       break;
 
     case MED_INTERNAL_INT64 :
-      _hdftype = H5T_NATIVE_LONG;
+      /* _hdftype = H5T_NATIVE_LONG; */
+      /* _hdftype = H5T_NATIVE_LLONG; */
+      _hdftype = MED_H5T_INT64;
       break;
 
     case MED_INTERNAL_CHAR:

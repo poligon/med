@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -141,7 +141,10 @@ MED_VERSIONED_API3::MED_VERSIONED_API3() : map<keyType,
    table[ "_MEDequivalenceInfo236"                   ] = _MEDequivalenceInfo236 ;
    table[ "_MEDequivalenceCorrespondenceSize300"     ] = _MEDequivalenceCorrespondenceSize30 ;
    table[ "_MEDequivalenceCorrespondenceSize236"     ] = _MEDequivalenceCorrespondenceSize236 ;
+   table[ "_MEDequivalenceCorrespondenceRd330"       ] = _MEDequivalenceCorrespondenceRd33 ;
    table[ "_MEDequivalenceCorrespondenceRd300"       ] = _MEDequivalenceCorrespondenceRd30 ;
+   table[ "_MEDequivalenceCorrespondenceWr330"       ] = _MEDequivalenceCorrespondenceWr33 ;
+   table[ "_MEDequivalenceCorrespondenceWr300"       ] = _MEDequivalenceCorrespondenceWr30 ;
    table[ "_MEDequivalenceCorrespondenceRd236"       ] = _MEDequivalenceCorrespondenceRd236 ;
    table[ "_MEDequivalenceComputingStepInfo300"      ] = _MEDequivalenceComputingStepInfo30 ;
    table[ "_MEDequivalenceComputingStepInfo236"      ] = _MEDequivalenceComputingStepInfo236 ;
@@ -155,6 +158,9 @@ MED_VERSIONED_API3::MED_VERSIONED_API3() : map<keyType,
    table[ "_MEDfieldCr310"                      ]   = _MEDfieldCr31 ;
    table[ "_MEDfieldValueAdvancedWr300"         ]   = _MEDfieldValueAdvancedWr30 ;
    table[ "_MEDfieldValueAdvancedRd300"         ]   = _MEDfieldValueAdvancedRd30 ;
+   table[ "_MEDfieldValueAdvancedWr330"         ]   = _MEDfieldValueAdvancedWr33 ;
+   //La lecture se fait selon la nouvelle API.
+   // table[ "_MEDfieldValueAdvancedRd330"         ]   = _MEDfieldValueAdvancedRd33 ;
    table[ "_MEDfieldValueAdvancedRd236"         ]   = _MEDfieldValueAdvancedRd236 ;
    table[ "_MEDfield23ComputingStepMeshInfo310" ]   = _MEDfield23ComputingStepMeshInfo31 ;
    table[ "_MEDfield23ComputingStepMeshInfo300" ]   = _MEDfield23ComputingStepMeshInfo30 ;
@@ -168,6 +174,7 @@ MED_VERSIONED_API3::MED_VERSIONED_API3() : map<keyType,
    table[ "_MEDfieldComputingStepInfo310"       ]   = _MEDfieldComputingStepInfo31 ;
    table[ "_MEDfieldComputingStepInfo300"       ]   = _MEDfieldComputingStepInfo30 ;
    table[ "_MEDfieldComputingStepInfo236"       ]   = _MEDfieldComputingStepInfo236 ;
+   table[ "_MEDfieldComputingStepMeshInfo310"   ]   = _MEDfieldComputingStepMeshInfo31 ;
    table[ "_MEDfieldComputingStepMeshInfo300"   ]   = _MEDfieldComputingStepMeshInfo30 ;
    table[ "_MEDfieldComputingStepMeshInfo236"   ]   = _MEDfieldComputingStepMeshInfo236 ;
    table[ "_MEDfieldnProfile300"                ]   = _MEDfieldnProfile30 ;
@@ -247,6 +254,11 @@ MED_VERSIONED_API3::MED_VERSIONED_API3() : map<keyType,
    table[ "_MEDsubdomainCorrespondenceSizeInfo300" ] = _MEDsubdomainCorrespondenceSizeInfo30 ;
    table[ "_MEDsubdomainCorrespondenceSizeInfo236" ] = _MEDsubdomainCorrespondenceSizeInfo236 ;
 
+   table[ "_MEDgetInternalGeometryTypeName330" ] = _MEDgetInternalGeometryTypeName33 ;
+   table[ "_MEDgetInternalGeometryTypeName300" ] = _MEDgetInternalGeometryTypeName30 ;
+   /* On devrait appeler l'API2.3.6 pour résoudre les types internes 
+      mais ce sont les mêmes en 236 et 30 */
+   table[ "_MEDgetInternalGeometryTypeName236" ] = _MEDgetInternalGeometryTypeName30 ;
 
 
 }

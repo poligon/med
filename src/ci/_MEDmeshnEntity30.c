@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -113,7 +113,7 @@ _MEDmeshnEntity30(int dummy, ...)
 
   if ((_meshid=_MEDmeshDatagroupOpen(fid,meshname,_meshpath,&_isasupportmesh)) < 0) {
     MED_ERR_(_ret,MED_ERR_OPEN,MED_ERR_DATAGROUP,MED_ERR_MESH_MSG);
-    SSCRUTE(_meshpath); goto ERROR;
+    SSCRUTE(meshname); goto ERROR;
   }
 
   /* Lecture de la dimension du maillage  */
@@ -216,7 +216,7 @@ _MEDmeshnEntity30(int dummy, ...)
    *  Ouverture du datagroup de niveau 4 <geotype>
    */
 
-  /* Pour <entitype>==MED_NODE, on renvoie 1 s'il existe au moins un dataset car
+  /* Pour <entitype>==MED_NODE && geotype == MED_GEO_ALL, on renvoie 1 s'il existe au moins un dataset car
      par construction du modèle via l'API le tableau de coordonnées preexiste forcément
      aux autres tableaux.
    */
@@ -242,7 +242,7 @@ _MEDmeshnEntity30(int dummy, ...)
 	ISCRUTE_int(geotype);goto ERROR;
       }
     } else
-      if ( _MEDgetInternalGeometryTypeName(_datagroupname3,geotype) < 0) {
+      if ( _MEDgetInternalGeometryTypeName(0,_datagroupname3,geotype) < 0) {
 	MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
 	ISCRUTE_int(geotype);SSCRUTE(meshname);ISCRUTE(numit);ISCRUTE(numdt);
 	SSCRUTE(_datagroupname2);goto ERROR;
@@ -466,7 +466,7 @@ _MEDmeshnEntity30(int dummy, ...)
 
   *transformation = (med_bool) _transformation;
 
-  if ( ( meddatatype == MED_CONNECTIVITY) && ( meddatatype == MED_COORDINATE ) ) {
+  if ( ( meddatatype == MED_CONNECTIVITY) || ( meddatatype == MED_COORDINATE ) ) {
     *transformation &= (med_bool) !_changement_s;
   }
 

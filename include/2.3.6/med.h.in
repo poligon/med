@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -91,11 +91,12 @@ typedef enum {MED_POINT1=1, MED_SEG2=102, MED_SEG3=103, MED_TRIA3=203,
 	      MED_PYRA5=305, MED_PENTA6=306, MED_HEXA8=308, MED_TETRA10=310, 
 	      MED_PYRA13=313, MED_PENTA15=315, MED_HEXA20=320, 
 	      MED_POLYGONE=400, MED_POLYGONE2=420, MED_POLYEDRE=500, MED_NONE=0,
-              MED_SEG4=104, MED_TRIA7=207,MED_QUAD9=209,MED_OCTA12=312,MED_HEXA27=327
+              MED_SEG4=104, MED_TRIA7=207,MED_QUAD9=209,MED_OCTA12=312,MED_PENTA18=318,MED_HEXA27=327
 	     } med_geometrie_element;
 
-/* Ne pas utiliser : 
-              MED_SEG4=104, MED_TRIA7=207,MED_QUAD9=209,MED_OCTA12=312, MED_HEXA27=327
+/* Ces types ont été définis à partir de la version 3.0 de med et ne peuvent pas être présents ds les fichiers 2.3 :
+              MED_SEG4=104, MED_TRIA7=207,MED_QUAD9=209,MED_OCTA12=312, MED_HEXA27=327, MED_PENTA18=318
+   Ils ont été déclarés afin de pouvoir uliser l'API3 sur des fichier 2.3
  */
 
 typedef enum {MED_NOD, MED_DESC} med_connectivite ; 

@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -106,7 +106,7 @@ MEDstructElementInfoByName(const med_idt             fid,
   /*
    * Lecture  de l'attribut MED_NOM_NOM (nom du maillage support)
    */
-  /* Chercher plutôt ds le maillage support et supprimer les attributs NBM et NBN */
+  /* TODO : Chercher plutôt ds le maillage support et supprimer les attributs NBM et NBN : .. A évaluer ...*/
   if ( _MEDattrStringLire(_elemid,MED_NOM_NOM,MED_NAME_SIZE,supportmeshname) < 0) {
     MED_ERR_(_ret,MED_ERR_READ,MED_ERR_ATTRIBUTE,_path);
     SSCRUTE(MED_NOM_NOM);SSCRUTE(supportmeshname);

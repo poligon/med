@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -71,8 +71,11 @@ MEDC_EXPORT extern void  _MEDequivalenceInfo30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceInfo236(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceSize30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceSize236(int dummy, ...);
+MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceRd33(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceRd30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceRd236(int dummy, ...);
+MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceWr33(int dummy, ...);
+MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceWr30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceComputingStepInfo30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceComputingStepInfo236(int dummy, ...);
 MEDC_EXPORT extern void  _MEDequivalenceCorrespondenceSizeInfo30(int dummy, ...);
@@ -110,6 +113,7 @@ MEDC_EXPORT extern void  _MEDfieldInfoByName236(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldComputingStepInfo30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldComputingStepInfo31(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldComputingStepInfo236(int dummy, ...);
+MEDC_EXPORT extern void  _MEDfieldComputingStepMeshInfo31(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldComputingStepMeshInfo30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldComputingStepMeshInfo236(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldnProfile30(int dummy, ...);
@@ -125,6 +129,8 @@ MEDC_EXPORT extern void  _MEDfield23nValue30(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfield23nValue236(int dummy, ...);
 MEDC_EXPORT extern void  _MEDfieldValueAdvancedWr30(int dummy,...);
 MEDC_EXPORT extern void  _MEDfieldValueAdvancedRd30(int dummy,...);
+MEDC_EXPORT extern void  _MEDfieldValueAdvancedWr33(int dummy,...);
+MEDC_EXPORT extern void  _MEDfieldValueAdvancedRd33(int dummy,...);
 MEDC_EXPORT extern void  _MEDfieldValueAdvancedRd236(int dummy,...);
 
 #endif

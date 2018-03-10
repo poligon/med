@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -182,7 +182,7 @@ void _MEDfieldValueAdvancedRd30(int dummy,...) {
 	ISCRUTE_int(geotype);goto ERROR;
       }
     } else {
-      if ( _MEDgetInternalGeometryTypeName(_geotypename,geotype) < 0) {
+      if ( _MEDgetInternalGeometryTypeName(fid,_geotypename,geotype) < 0) {
 	MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_GEOMETRIC,MED_ERR_VALUE_MSG);
 	ISCRUTE_int(geotype);SSCRUTE(fieldname);goto ERROR;
       }
@@ -365,11 +365,59 @@ void _MEDfieldValueAdvancedRd30(int dummy,...) {
    * Lecture du champ
    */
 
+  /* Tous les types med_field_type sont maintenant autorisés dans MEDfieldCr mais :
+
+   Avant la 3.3.0 seuls les types : MED_FLOAT64, MED_INT32 et MED_INT64 étaient autorisés dans MEDfieldCr et seuls les types med_int et med_float64 pouvaient être utilisés en C.
+     La configuration du med_int était prédominante sur le choix du type de champ pour définir de la taille de stockage interne.
+     Il faut garder à l'esprit que les étapes d'écriture et de lecture ne se font pas forcément avec la même configuration de med_int.
+ 
+   A l'écriture :
+      - si med_int=int  les champs MED_INT32 sont stockés   en 32bits
+      - si med_int=int  les champs MED_INT64 sont interdits
+      - si med_int=long les champs MED_INT32 sont stockés   en 64bits
+      - si med_int=long les champs MED_INT64 sont stockés   en 64bits
+
+   A la lecture :
+      - si med_int=int  les champs MED_INT32 sont lus       en 32bits avec conversion 64->32 s'il avait été stocké en 64bits (configuration écriture med_int=long)
+      - si med_int=int  les champs MED_INT64 ne pouvaient pas être lu (pour prevenir la perte d'information)
+      - si med_int=long les champs MED_INT32 sont lus       en 64bits avec conversion 32->64 s'il avait été stocké en 32bits (configuration écriture med_int=int)
+      - si med_int=long les champs MED_INT64 sont lus       en 64bits
+
+   Depuis la 3.3.0 en plus des types MED_FLOAT64, MED_INT32 et MED_INT64, les types MED_FLOAT32 et MED_INT sont autorisés. 
+     Aux types med_int et med_float64 utilisés en C sont ajoutés les types med_float32, med_int32 et med_int64.
+     Si la plateforme possède des entiers 64bits testé à la configuration.
+
+   A l'écriture :  
+      - si med_int=int  les champs MED_INT32 sont toujours  stockés              en 32bits  (utiliser med_int32 ou med_int   )
+      - si med_int=int  les champs MED_INT64 sont désormais autorisés et stockés en 64bits  (utiliser med_int64              )
+      - si med_int=int  les champs MED_INT   sont désormais acceptés  et stockés en 32bits  (utiliser med_int   ou med_int32 )
+      - si med_int=long les champs MED_INT32 sont désormais stockés              en 32bits  (utiliser med_int32) 
+      - si med_int=long les champs MED_INT64 sont toujours  autorisés et stockés en 64bits  (utiliser med_int64 ou med_int )
+      - si med_int=long les champs MED_INT   sont désormais acceptés  et stockés en 64bits  (utiliser med_int ou med_int64 ) 
+
+   A la lecture :  
+      - si med_int=int  les champs MED_INT32 sont toujours    lus                en 32bits                 (utiliser med_int32 ou med_int)
+      - si med_int=int  les champs MED_INT64 sont acceptés et lus                en 64bits sans conversion (utiliser med_int64)
+      - si med_int=int  les champs MED_INT   sont acceptés et lus                en 32bits avec conversion si necessaire (0 si > maxint32 , utiliser med_int ou med_int32)
+      - si med_int=long les champs MED_INT32 sont toujours    lus                en 32bits sans conversion (utiliser le type med_int32)
+      - si med_int=long les champs MED_INT64 sont toujours    lus                en 64bits sans conversion (utiliser le type med_int64 ou med_int)
+      - si med_int=long les champs MED_INT   sont acceptés et lus                en 64bits avec conversion  si necessaire (utiliser le type med_int32)
+  
+REM : 
+   Sur un Unix 32 bits sur architecture 64bits il est possible d'utiliser des MED_INT64, l'étape de configuration vérifier qu'elle peut utiliser ou définit le type C int64_t
+REM2:
+   A lecture d'un fichier < 3.3.0 avec une bibliothèque >= 3.3.0 configurée avec med_int=long :
+     - Si le fichier contient un champ MED_INT32, le driver 3.0 de la bibliothèque > 3.3.0 relisait en 64 bits ce qui provoquerait une erreur de segmentation si l'allocation est faite en 32bits conformément au nouveau mode de fonctionement des types de champs. C'est la raison pour laquelle on ne traite pas différement les fichiers 3.0 et 3.3. Il n'y a donc pas de versionement 33 de cette routine par rapport à cette fonctionnalité. 
+
+  */
 
   switch(_fieldtype)
     {
     case MED_FLOAT64 :
-      if ( _MEDdatasetRd(_datagroup3,MED_NOM_CO,MED_FLOAT64,_filter,value) < 0) {
+    case MED_FLOAT32 :
+    case MED_INT32   :
+    case MED_INT64   :
+      if ( _MEDdatasetRd(_datagroup3,MED_NOM_CO,_fieldtype,_filter,value) < 0) {
 	MED_ERR_(_ret,MED_ERR_READ,MED_ERR_DATASET,MED_NOM_CO);
 	SSCRUTE(fieldname);SSCRUTE(_datagroupname1);SSCRUTE(_datagroupname2);SSCRUTE(_profilename);
 /* 	ISCRUTE((void*)value); */
@@ -377,8 +425,8 @@ void _MEDfieldValueAdvancedRd30(int dummy,...) {
 	goto ERROR;
       }
       break;
-
-    case MED_INT32 :
+      /*Le champ est un champ 32bits stocké */
+    case MED_INT :
 #if defined(HAVE_F77INT64)
       if ( _MEDdatasetRd(_datagroup3,MED_NOM_CO,MED_INT64,_filter,value) < 0) {
 	MED_ERR_(_ret,MED_ERR_READ,MED_ERR_DATASET,MED_NOM_CO);
@@ -393,20 +441,6 @@ void _MEDfieldValueAdvancedRd30(int dummy,...) {
       }
 #endif
      break;
-
-    case MED_INT64 :
-#if defined(HAVE_F77INT64)
-      if ( _MEDdatasetRd(_datagroup3,MED_NOM_CO,MED_INT64,_filter,value) < 0) {
-	MED_ERR_(_ret,MED_ERR_READ,MED_ERR_DATASET,MED_NOM_CO);
-	SSCRUTE(fieldname);SSCRUTE(_datagroupname1);SSCRUTE(_datagroupname2);SSCRUTE(_profilename);
-	goto ERROR;
-      }
-
-#else
-     MESSAGE("Impossible de lire le dataset de type MED_INT64 sur une plateforme dépourvue de int64 !");
-     goto ERROR;
-#endif
-      break;
 
     default :
       MED_ERR_(_ret,MED_ERR_INVALID,MED_ERR_RANGE,MED_ERR_FIELD_MSG);

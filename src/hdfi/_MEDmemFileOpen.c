@@ -23,7 +23,7 @@
 #include <H5FDpublic.h>
 
 #include <assert.h>
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 #define F_OK 0
 #else
 #include <unistd.h>

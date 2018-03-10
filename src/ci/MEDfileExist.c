@@ -20,7 +20,7 @@
 #include <med_config.h>
 #include <med_outils.h>
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
 #define	R_OK	4		/* Test for read permission.  */
 #define	W_OK	2		/* Test for write permission.  */
 #define	X_OK	1		/* Test for execute permission.  */
@@ -29,7 +29,7 @@
 #include <unistd.h>
 #endif
 
-#ifndef PPRO_NT
+#ifndef PPRO_NT_CALL
 #include <libgen.h>
 #endif
 
@@ -58,7 +58,7 @@ MEDfileExist(const char* const     filename,
   int     _mode     = R_OK;
   char   *_filename = NULL;
 
-#ifdef PPRO_NT
+#ifdef PPRO_NT_CALL
   char   _dirname[_MAX_PATH];
   char   _drive[_MAX_DRIVE];
   char   _direc[_MAX_DIR];
@@ -81,7 +81,7 @@ MEDfileExist(const char* const     filename,
     if (accessmode==MED_ACC_RDONLY) goto SORTIE;
     _mode      = _mode|W_OK|X_OK;
 
-#ifndef PPRO_NT
+#ifndef PPRO_NT_CALL
     if (!(_filename = strndup (filename,2*MED_PATHNAME_SIZE))) {
       MED_ERR_(_ret,MED_ERR_CALL,MED_ERR_API,"strndup");
       SSCRUTE(filename);SSCRUTE(_filename);goto ERROR;
@@ -93,7 +93,7 @@ MEDfileExist(const char* const     filename,
     }
 #endif
 
-#ifndef PPRO_NT
+#ifndef PPRO_NT_CALL
     if (!(_dirname = dirname(_filename))) {
       MED_ERR_(_ret,MED_ERR_CALL,MED_ERR_API,"dirname");
       SSCRUTE(_filename);SSCRUTE(_dirname);goto ERROR;

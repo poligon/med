@@ -25,7 +25,10 @@ _MEDgetDatasetParameter.c \
 _MEDgetDatatype.c \
 _MEDmeshtypeCompatibility.c \
 _MEDgetEntityTypeName.c \
+_MEDgetFieldEntityGeoTypeName.c \
 _MEDgetInternalGeometryTypeName.c \
+_MEDgetInternalGeometryTypeName30.c \
+_MEDgetInternalGeometryTypeName33.c \
 _MEDgetExternalGeometryTypeName.c \
 _MEDcheckVersion30.c \
 _MED23v30stringConvert.c \

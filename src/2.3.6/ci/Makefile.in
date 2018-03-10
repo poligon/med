@@ -111,6 +111,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/ac_check_sizeof_fortran.m4 \
 	$(top_srcdir)/config/med_check_python.m4 \
 	$(top_srcdir)/config/med_check_swig.m4 \
 	$(top_srcdir)/config/med_check_typeof_hidt.m4 \
+	$(top_srcdir)/config/med_check_typeof_int64.m4 \
 	$(top_srcdir)/config/med_check_typeof_medint.m4 \
 	$(top_srcdir)/config/med_disable_api23.m4 \
 	$(top_srcdir)/config/med_enable_check23.m4 \
@@ -279,7 +280,10 @@ EXEEXT = @EXEEXT@
 F77 = @F77@
 FC = @FC@
 FCFLAGS = @FCFLAGS@
+FCFLAGS_F = @FCFLAGS_F@
+FCFLAGS_F90 = @FCFLAGS_F90@
 FCLIBS = @FCLIBS@
+FC_DEFINE = @FC_DEFINE@
 FFLAGS = @FFLAGS@
 FGREP = @FGREP@
 FLIBS = @FLIBS@
@@ -319,6 +323,8 @@ MANIFEST_TOOL = @MANIFEST_TOOL@
 MED_API_23 = @MED_API_23@
 MED_CHECK_23FORMAT = @MED_CHECK_23FORMAT@
 MED_DEFINE_MED_HAVE_MPI = @MED_DEFINE_MED_HAVE_MPI@
+MED_INT32 = @MED_INT32@
+MED_INT64 = @MED_INT64@
 MED_NUM_MAJEUR = @MED_NUM_MAJEUR@
 MED_NUM_MINEUR = @MED_NUM_MINEUR@
 MED_NUM_RELEASE = @MED_NUM_RELEASE@
@@ -883,6 +889,7 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
+#AM_ETAGSFLAGS=
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

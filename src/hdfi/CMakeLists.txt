@@ -1,67 +1,67 @@
 SET(hdfi_SOURCES 
-_MEDfilterEntityFullIGlobalCr.c 
-_MEDfilterEntityFullICompactCr.c 
-_MEDfilterEntityNoIGlobalCr.c 
-_MEDfilterEntityNoICompactCr.c 
-_MEDselectAllEntitiesFullI.c 
-_MEDselectAllEntitiesNoI.c 
-_MEDfilterBlockOfEntityFullIGlobalCr.c 
-_MEDfilterBlockOfEntityNoIGlobalCr.c 
-_MEDfilterBlockOfEntityFullICompactCr.c 
-_MEDfilterBlockOfEntityNoICompactCr.c 
-_MEDdatasetWr.c 
-_MEDdatasetRd.c 
-_MEDfileOpen.c 
-_MEDfileName.c 
-_MEDmemFileOpen.c 
-_MEDfileCreate.c 
-_MEDnObjects.c 
-__MEDobjectGetName.c 
-_MEDobjectCrOrderGetName.c 
-_MEDobjectGetName.c 
-_MEDcopyName.c 
-_MEDvisit.c 
-_MEDlinkObjs.c 
-_MEDgetComputationStepName.c 
-_MEDdatagroupCrOrderCr.c 
-_MEDdatagroupOpen.c 
-_MEDsoftlinkDel.c 
-_MEDisasoftlink.c 
-_MEDgetDatasetChgt.c 
-_MEDdatasetExistByMedtype.c 
-_MEDattributeStringRdByName.c 
-_MEDattributeNumRdByName.c 
-_MEDattributeStringWrByName.c 
-_MEDattributeStringWr.c 
-_MEDattributeNumWrByName.c 
-_MEDattributeNumWr.c 
-_MEDcheckAttributeStringInit.c 
-_MEDcheckAttributeStringFin.c 
-_MEDcheckAttributeStringFunc.c 
-_MEDchecknSublinkFunc.c 
-_MEDiterate.c 
-_MEDobjectGetRank.c 
-_MEDdatagroupExist.c 
-_MEDdatasetExist.c 
-_MEDattributeExist.c
-MEDattrFermer.c 
-MEDattrNumLire.c 
-MEDattrOuvrir.c 
-MEDattrStringLire.c 
-MEDdatagroupCreer.c 
-MEDdatagroupFermer.c 
-MEDdatagroupOuvrir.c 
-MEDdatagroupLienSupprimer.c 
-MEDdatagroupLienCreer.c 
-MEDdatasetFermer.c 
-MEDdatasetOuvrir.c 
-MEDfichierFermer.c 
-MEDfichierNo.c 
-MEDmodeErreurVerrouiller.c 
-MEDfichierMonter.c 
-MEDfichierDemonter.c 
-MEDobjetsOuverts.c
-  )
+    MEDattrFermer.c
+    _MEDattributeExist.c
+    _MEDattributeNumRdByName.c
+    _MEDattributeNumWrByName.c
+    _MEDattributeNumWr.c
+    _MEDattributeStringRdByName.c
+    _MEDattributeStringWrByName.c
+    _MEDattributeStringWr.c
+    MEDattrNumLire.c
+    MEDattrOuvrir.c
+    MEDattrStringLire.c
+    _MEDcheckAttributeStringFin.c
+    _MEDcheckAttributeStringFunc.c
+    _MEDcheckAttributeStringInit.c
+    _MEDchecknSublinkFunc.c
+    _MEDcopyName.c
+    MEDdatagroupCreer.c
+    _MEDdatagroupCrOrderCr.c
+    _MEDdatagroupExist.c
+    MEDdatagroupFermer.c
+    MEDdatagroupLienCreer.c
+    MEDdatagroupLienSupprimer.c
+    _MEDdatagroupOpen.c
+    MEDdatagroupOuvrir.c
+    _MEDdatasetExistByMedtype.c
+    _MEDdatasetExist.c
+    MEDdatasetFermer.c
+    MEDdatasetOuvrir.c
+    _MEDdatasetRd.c
+    _MEDdatasetWr.c
+    MEDfichierDemonter.c
+    MEDfichierFermer.c
+    MEDfichierMonter.c
+    MEDfichierNo.c
+    _MEDfileCreate.c
+    _MEDfileName.c
+    _MEDfileOpen.c
+    _MEDfilterBlockOfEntityFullICompactCr.c
+    _MEDfilterBlockOfEntityFullIGlobalCr.c
+    _MEDfilterBlockOfEntityNoICompactCr.c
+    _MEDfilterBlockOfEntityNoIGlobalCr.c
+    _MEDfilterEntityFullICompactCr.c
+    _MEDfilterEntityFullIGlobalCr.c
+    _MEDfilterEntityNoICompactCr.c
+    _MEDfilterEntityNoIGlobalCr.c
+    _MEDgetComputationStepName.c
+    _MEDgetDatasetChgt.c
+    _MEDisasoftlink.c
+    _MEDiterate.c
+    _MEDlinkObjs.c
+    _MEDmemFileOpen.c
+    MEDmodeErreurVerrouiller.c
+    _MEDnObjects.c
+    _MEDobjectCrOrderGetName.c
+    __MEDobjectGetName.c
+    _MEDobjectGetName.c
+    _MEDobjectGetRank.c
+    MEDobjetsOuverts.c
+    _MEDselectAllEntitiesFullI.c
+    _MEDselectAllEntitiesNoI.c
+    _MEDsoftlinkDel.c
+    _MEDvisit.c
+)
 
 IF(MEDFILE_USE_MPI)
   LIST(APPEND hdfi_SOURCES _MEDparFileOpen.c _MEDparFileCreate.c)

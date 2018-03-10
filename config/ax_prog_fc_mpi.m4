@@ -145,7 +145,7 @@ dnl
 AC_DEFUN([__AX_PROG_FC_MPI], [
   AC_ARG_VAR(MPIFC,[MPI Fortran compiler command])
   ifelse([$1],,[_ax_prog_fc_mpi_mpi_wanted=yes],[
-    AC_MSG_CHECKING([whether to compile using MPI])
+    AC_MSG_CHECKING([whether to compile FC using MPI])
     if $1; then
       _ax_prog_fc_mpi_mpi_wanted=yes
     else

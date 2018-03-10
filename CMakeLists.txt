@@ -16,7 +16,7 @@ ENDIF()
 
 ## Version number 
 SET(MED_NUM_MAJEUR  3)
-SET(MED_NUM_MINEUR  2)
+SET(MED_NUM_MINEUR  3)
 SET(MED_NUM_RELEASE 1)
 
 SET(MED_STR_VERSION "${MED_NUM_MAJEUR}.${MED_NUM_MINEUR}.${MED_NUM_RELEASE}")
@@ -24,14 +24,9 @@ SET(MED_STR_VERSION "${MED_NUM_MAJEUR}.${MED_NUM_MINEUR}.${MED_NUM_RELEASE}")
 SET(LONG_OR_INT int)
 
 ## User options:
-OPTION (MEDFILE_BUILD_TESTS "Build MED-file tests" ON)
-IF (MEDFILE_BUILD_TESTS)
-  ENABLE_TESTING()
-ENDIF()
 OPTION (MEDFILE_BUILD_SHARED_LIBS "Build MED-file shared libraries" ON)
 OPTION (MEDFILE_BUILD_STATIC_LIBS "Build MED-file static libraries" OFF)
-OPTION (MEDFILE_INSTALL_DOC "Install pre-built documentation" ON)
-OPTION (MEDFILE_BUILD_PYTHON "Build Python bindings (needs SWIG)" OFF)
+OPTION (MEDFILE_INSTALL_DOC "Install pre-built documentation" OFF)
 
 # Option checking.
 IF(WIN32 AND MEDFILE_BUILD_SHARED_LIBS AND MEDFILE_BUILD_STATIC_LIBS)
@@ -63,11 +58,15 @@ IF(WIN32)
   ADD_DEFINITIONS(-D_SCL_SECURE_NO_WARNINGS)  # To disable windows warnings std::copy, std::transform, ...
   ADD_DEFINITIONS(-DWNT -DWIN32)
   ADD_DEFINITIONS(-D_WIN32_WINNT=0x0500) # Windows 2000 or later API is required
-  ADD_DEFINITIONS(-DPPRO_NT) # For medfile
-  
-  # Needed to avoid a seg fault at runtime!
-  # The variable is not very well documented but seems to exist
-  SET(CMAKE_Fortran_FLAGS  "/iface:mixed_str_len_arg ${CMAKE_Fortran_FLAGS}")
+  ADD_DEFINITIONS(-DPPRO_NT_CALL) # For windows system functions call
+
+  IF(NOT MINGW)
+    # Needed to avoid a seg fault at runtime!
+    # The variable is not very well documented but seems to exist
+    SET(CMAKE_Fortran_FLAGS  "/iface:mixed_str_len_arg ${CMAKE_Fortran_FLAGS}")
+    ADD_DEFINITIONS(-DPPRO_NT) # For windows medfile function nammes
+  ENDIF()
+
 ELSE()
   # Ensure intermediate OBJECT libraries and static libs are built with -fPIC:
   SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -86,13 +85,6 @@ SET(INSTALL_INCLUDE_DIR include)
 MED_FIND_HDF5()
 MED_FIND_MPI()
 
-IF(MEDFILE_BUILD_PYTHON)
-  FIND_PACKAGE(SWIG REQUIRED)
-  INCLUDE(${SWIG_USE_FILE})
-  FIND_PACKAGE(PythonLibs REQUIRED)
-  FIND_PACKAGE(PythonInterp REQUIRED)  # to get version string ...
-ENDIF()
-
 ## Creation of files med_config.h.cmake
 MED_CREATE_CONFIG_FILES()
 
@@ -110,18 +102,6 @@ CONFIGURE_FILE("${PROJECT_BINARY_DIR}/include/2.3.6/med_config.h.cmake" "${PROJE
 ## Sources 
 ADD_SUBDIRECTORY(include)
 ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(tools)
-IF(MEDFILE_BUILD_TESTS)
-  ADD_SUBDIRECTORY(tests)
-ENDIF()
-IF(MEDFILE_BUILD_PYTHON)
-  ADD_SUBDIRECTORY(python)
-ENDIF()
-
-## Installation of the doc
-IF(MEDFILE_INSTALL_DOC)
-  INSTALL(DIRECTORY doc DESTINATION ${CMAKE_INSTALL_PREFIX}/share)
-ENDIF()
 
 #######################
 ## Configuration export

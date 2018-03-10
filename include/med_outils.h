@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -102,6 +102,7 @@
 #define MED_NOM_H27 "H27"
 #define MED_NOM_PE6 "PE6"
 #define MED_NOM_P15 "P15"
+#define MED_NOM_P18 "P18"
 #define MED_NOM_PY5 "PY5"
 #define MED_NOM_P13 "P13"
 

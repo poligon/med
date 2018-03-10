@@ -1,6 +1,6 @@
 /*  This file is part of MED.
  *
- *  COPYRIGHT (C) 1999 - 2016  EDF R&D, CEA/DEN
+ *  COPYRIGHT (C) 1999 - 2017  EDF R&D, CEA/DEN
  *  MED is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +31,7 @@ _MEDobjectGetName(const med_idt fid,const char * const path,const med_size ind,c
   if ( H5Literate_by_name(fid,path, H5_INDEX_NAME, H5_ITER_INC,
 			  (hsize_t *) &ind, _MEDcopyName, name,H5P_DEFAULT ) < 0 ) {
     MED_ERR_(_ret,MED_ERR_VISIT,MED_ERR_DATAGROUP,path);
-    H5Eprint1(stderr);
+    /* H5Eprint1(stderr); */
     goto ERROR;
   }
 
